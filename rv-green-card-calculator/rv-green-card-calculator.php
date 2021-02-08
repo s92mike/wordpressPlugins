@@ -18,7 +18,7 @@ require PLUGIN_PATH . 'inc/class-common.php';
 
 function my_enqueues() {
 	global $post;
-	if ($post->post_name === "demo-page") {
+	if ($post->post_name === "sample-page") {
 		//Dependencies
 		wp_enqueue_script( 'jquery');
 		wp_enqueue_script( 'moment');

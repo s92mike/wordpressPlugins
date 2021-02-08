@@ -10,7 +10,35 @@ const __sequence = [
     __loader,
     __summary
 ]
+const __defaultMain = {
+    seq: 0,
+    data: {
+        date: '',
+        married: null,
+        valid: null,
+        kind: null
+    }
+}
 
+class Buttons extends PureComponent {
+    state = {
+        currentButton: 'startOver',
+        startOver: {
+            title: 'Start Over',
+            className: ''
+        }
+    }
+    updateState = () => {
+        if (this.state.currentButton === 'startOver') {
+            this.props.resetState();
+        }
+    }
+    render() {
+        const { currentButton } = this.state;
+        const { title, className } = this.state[currentButton];
+        return (<button onClick={this.updateState.bind(this)} className={'button conditional' + className }>{ title }</button>);
+    }
+}
 class YesNoButton extends PureComponent {
     updateButton = (val) => {
         const { marriage, validity, onClick, updateStateCurrent } = this.props;
@@ -38,12 +66,34 @@ YesNoButton.defaultProps = {
     validity: false
 }
 
-class LoaderCustom extends PureComponent {
-    render() {
-        return (<div className="loader">
-            <img src="/wp-content/plugins/rv-green-card-calculator/images/rapidvisathrobber.gif" alt=""/>
-        </div>);
+class ErrorDisplay extends PureComponent {
+    state = {
+        message: {
+            validity: {
+                content: 'If your green card is no longer valid, you are not eligible to apply for citizenship',
+                bold: '(Call us at 800-872-1458 for help)'
+            }
+        }
     }
+    render() {
+        const { type, resetState } = this.props;
+        const { content, bold } = this.state.message[type];
+        return (
+            <div className='error'>
+                <div className='message'>
+                    <h4>{content}</h4>
+                    <b>{bold}</b>
+                </div>
+                <div classname='buttons'>
+                    <Buttons resetState={resetState} />
+                </div>
+            </div>
+        );
+    }
+}
+
+ErrorDisplay.defaultProps = {
+    type: 'validity'
 }
 
 class DateTimePicker extends PureComponent {
@@ -62,6 +112,14 @@ class DateTimePicker extends PureComponent {
     }
     render() {
         return (<div class="datecontainer"><input type='text' class="form-control" id='datetimepicker' /></div>);
+    }
+}
+
+class LoaderCustom extends PureComponent {
+    render() {
+        return (<div className="loader">
+            <img src="/wp-content/plugins/rv-green-card-calculator/images/rapidvisathrobber.gif" alt=""/>
+        </div>);
     }
 }
 
@@ -167,16 +225,15 @@ class ProcessStep extends PureComponent {
 
 class Main extends PureComponent {
     state = {
-        seq: 0,
-        data: {
-            date: '',
-            married: null,
-            valid: null,
-            kind: null
-        }
+        ...__defaultMain
     }
     componentChanger = () => {
-        const { seq } = this.state;
+        const { seq, data: { valid, married } } = this.state;
+        if (valid === false) {
+            return <ErrorDisplay resetState = {this.resetState.bind(this)}/>;
+        } else if (married === true) {
+            
+        }
         switch (__sequence[seq]) {
             case __progress:
                 return <ProgressBar onClick={this.updateStateSeq.bind(this)} />;
@@ -203,6 +260,11 @@ class Main extends PureComponent {
                 }
             }
         })
+    }
+    resetState = () => {
+        this.setState({
+            ...__defaultMain
+        });
     }
     render() {
         return (this.componentChanger());
