@@ -135,6 +135,10 @@
 #nat-calc-wrapper .successfull .button {
   margin: 0 10px 10px;
 }
+#nat-calculator .progress-bar {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 #nat-calculator .progress-bar.react {
   background-color: transparent;
 }

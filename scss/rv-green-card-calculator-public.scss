@@ -139,6 +139,8 @@
 #nat-calculator {
     @extend .main-container;
     .progress-bar {
+        left: 50%;
+        transform: translate(-50%, -50%);
         &.react{
             background-color: transparent;
             .bar {

@@ -11,6 +11,7 @@ const __sequence = [
     __summary
 ]
 const __defaultMain = {
+    dev: true,
     seq: 0,
     data: {
         date: '',
@@ -18,6 +19,14 @@ const __defaultMain = {
         valid: null,
         kind: null
     }
+}
+const __defaultProcess = {
+    current: 0,
+    maxSteps: 0,
+    steps: [{
+        title: '',
+        component: ''
+    }]
 }
 
 class Buttons extends PureComponent {
@@ -39,31 +48,46 @@ class Buttons extends PureComponent {
         return (<button onClick={this.updateState.bind(this)} className={'button conditional' + className }>{ title }</button>);
     }
 }
-class YesNoButton extends PureComponent {
+class TwoButtons extends PureComponent {
+    state = {
+        yesNo: {
+            first: 'Yes',
+            second: 'No'
+        },
+        type: {
+            first: '2 Years Green Card (Adjustment of Status)',
+            second: '10 Years Green Card (Removal of Conditions)'
+        }
+    }
     updateButton = (val) => {
-        const { marriage, validity, onClick, updateStateCurrent } = this.props;
+        const { marriage, validity, onClick, updateStateCurrent, type } = this.props;
         if (marriage) {
             onClick({ married: val });
         }
         if (validity) {
             onClick({ valid: val });
         }
-        updateStateCurrent();
+        updateStateCurrent({ marriage, val, type });
     }
     render() {
         const { updateButton } = this;
+        const { current } = this.props;
+        const { first, second } = this.state[current];
         return (
             <div class="button-container">
-                <button class="button conditional" onClick={updateButton.bind(this, true)}>Yes</button>
-                <button class="button conditional" onClick={updateButton.bind(this, false)}>No</button>
+                <button class="button conditional" onClick={updateButton.bind(this, true)}>{first}</button>
+                <button class="button conditional" onClick={updateButton.bind(this, false)}>{second}</button>
             </div>
         );
     }
 }
 
-YesNoButton.defaultProps = {
+TwoButtons.defaultProps = {
+    current: 'yesNo',
     marriage: false,
-    validity: false
+    validity: false,
+    type: false,
+    updateStateCurrent: ()=>{return null;}
 }
 
 class ErrorDisplay extends PureComponent {
@@ -162,12 +186,7 @@ class ProgressBar extends PureComponent {
 
 class ProcessStep extends PureComponent {
     state = {
-        current: 0,
-        maxSteps: 0,
-        steps: [{
-            title: '',
-            component: ''
-        }]
+        ...__defaultProcess
     }
     componentDidMount() {
         this.setState((prevState)=>{
@@ -181,17 +200,23 @@ class ProcessStep extends PureComponent {
                 },
                 {
                     title: <h4>Is your current green card still valid?</h4>,
-                    component: <YesNoButton 
+                    component: <TwoButtons 
                         validity={true} 
                         onClick={updateStateData}
                         updateStateCurrent = {this.updateStateCurrent} />
                 },
                 {
                     title: <h4>Did you obtain your green card through marriage to US a citizen?</h4>,
-                    component: <YesNoButton 
-                        marriage={true} 
+                    component: <TwoButtons 
                         onClick={updateStateData}
+                        marriage={true} 
                         updateStateCurrent = {this.updateStateCurrent} />
+                },
+                {
+                    title: <h4>What is your current Green Card?</h4>,
+                    component: <TwoButtons
+                        current='type'
+                        type={true} />
                 }
             ];
             return {
@@ -201,9 +226,9 @@ class ProcessStep extends PureComponent {
             }
         });
     }
-    updateStateCurrent = () => {
+    updateStateCurrent = (arg = { marriage: false, val: false, type: false }) => {
         const { maxSteps, current } = this.state;
-        if (current < maxSteps) {
+        if (current < maxSteps && (!(arg.marriage && arg.val === false) || (arg.type && arg.val === false))) {
             this.setState((prevState) => {
                 return { current: prevState.current + 1 };
             });
@@ -231,14 +256,15 @@ class Main extends PureComponent {
         const { seq, data: { valid, married } } = this.state;
         if (valid === false) {
             return <ErrorDisplay resetState = {this.resetState.bind(this)}/>;
-        } else if (married === true) {
-            
         }
         switch (__sequence[seq]) {
             case __progress:
                 return <ProgressBar onClick={this.updateStateSeq.bind(this)} />;
             case __process:
-                return <ProcessStep updateStateData={this.updateStateData.bind(this)} updateStateSeq={this.updateStateSeq} />;
+                return <ProcessStep 
+                    married={married}
+                    updateStateData={this.updateStateData.bind(this)} 
+                    updateStateSeq={this.updateStateSeq} />;
             case __loader:
                 return <LoaderCustom />;
             default: 
@@ -267,6 +293,17 @@ class Main extends PureComponent {
         });
     }
     render() {
+        const { dev } = this.state;
+        if (dev) {
+            return (<div>
+                {this.componentChanger()}
+                <div style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0
+                }}><Buttons resetState={this.resetState.bind(this)} /></div>
+            </div>)
+        }
         return (this.componentChanger());
     }
 }
