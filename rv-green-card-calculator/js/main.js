@@ -4,7 +4,6 @@ const __applyForCitizenshipText = 'applyForCitizenship';
 const __progress = 'progress';
 const __process = 'process';
 const __summary = 'summary';
-const __error = 'error';
 const __loader = 'loader';
 const __sequence = [
     __progress,
@@ -33,19 +32,17 @@ const __numberInText = [
     'zero', 'one', 'two',
     'three', 'four', 'five'
 ]
-
 const yesOrNoText = (flag) => {
     return flag ? 'Yes' : 'No';
 }
-
 const numberLeadingZero = (num) => {
     return num < 10 ? '0' + num : num;
 }
-const yearsOfResident = ({ tempYear, yearsToCitizenship }) => {
-    return parseInt(tempYear) + parseInt(yearsToCitizenship);
-}
 const ninetyDaysEarlier = (currentDate) => {
     return currentDate - 90;
+}
+const yearsOfResident = ({ tempYear, yearsToCitizenship }) => {
+    return parseInt(tempYear) + parseInt(yearsToCitizenship);
 }
 const displayDateFormat = (currentDate, separator) => {
     return currentDate.getFullYear() + separator + numberLeadingZero(currentDate.getMonth() + 1) + separator + numberLeadingZero(currentDate.getDate());
@@ -110,17 +107,20 @@ class TwoButtons extends PureComponent {
         }
     }
     updateButton = (val) => {
-        const { marriage, validity, onClick, updateStateCurrent, type } = this.props;
-        if (marriage) {
-            onClick({ married: val });
-        }
-        if (validity) {
-            onClick({ valid: val });
-        }
-        if (type) {
-            onClick({ kind: val })
-        }
-        updateStateCurrent({ marriage, val, type });
+        jQuery('#nat-calculator .process').fadeOut('slow', () => {
+            const { marriage, validity, onClick, updateStateCurrent, type } = this.props;
+            if (marriage) {
+                onClick({ married: val });
+            }
+            if (validity) {
+                onClick({ valid: val });
+            }
+            if (type) {
+                onClick({ kind: val })
+            }
+            updateStateCurrent({ marriage, val, type });
+            jQuery('#nat-calculator .process').slideDown('slow');
+        });
     }
     render() {
         const { updateButton } = this;
@@ -153,8 +153,8 @@ class Summary extends Component {
         return (<div className='summary'>
             <h4>Green Card issued: <b>{data.date}</b></h4>
             <h4>Green Card obtained through marriage to a US citizen: <b>{yesOrNoText(data.married)}</b></h4>
-            <h4>Green Card validity: <b>{yesOrNoText(data.valid)}</b></h4>
-            <h4 className="success">The soonest you can apply for citizenship is: <b>{natSched}</b></h4>
+            <h4 className="valid">Green Card validity: <b>{yesOrNoText(data.valid)}</b></h4>
+            <h4 className="success-react">The soonest you can apply for citizenship is: <b>{natSched}</b></h4>
             <span>(90 days before your {yearsToCitizenship} years permanent residency; Date format: YYYY/MM/DD)</span>
             {data.kind ? <p><b>Disclaimer: </b>You need a 10 Year Green Card (Removal of Condition) to apply for Naturalization Citizenship (Call us at 800-872-1458 for help)</p> :''}
         </div>)
@@ -188,10 +188,10 @@ class DisplayComponent extends PureComponent {
         message: {
             validity: {
                 content: <h4>If your green card is no longer valid, you are not eligible to apply for citizenship<b>(Call us at 800-872-1458 for help)</b></h4>,
-                divClassName: 'error'
+                divClassName: 'error-react'
             },
             married2YGC: {
-                content: <h4>You need a 5 Years Green Card(Removal of Conditions) to apply for Naturalization Citizenship <b>(Call us at 800-872-1458 for help)</b></h4>,
+                content: <h4>if you don't have 10 Years Green Card(Removal of Conditions), you are not eligible to apply for citizenship <b>(Call us at 800-872-1458 for help)</b></h4>,
                 divClassName: 'info'
             }
         }
@@ -213,13 +213,13 @@ class DisplayComponent extends PureComponent {
             case 'success':
                 display = {
                     content: this.displaySummary(data),
-                    divClassName: 'success'
+                    divClassName: 'success-react'
                 }
                 break;
             default:
                 display = {
                     content: <h4>No message type of preDefinedMessage function</h4>,
-                    divClassName: 'error'
+                    divClassName: 'error-react'
                 }
                 break;
         }
@@ -230,7 +230,7 @@ class DisplayComponent extends PureComponent {
         const { content, divClassName } = this.preDefinedMessage(this.props);
         return (
             <div className={divClassName}>
-                <div className='message'>
+                <div className='message-react'>
                     {content}
                 </div>
                 <div classname='buttons'>
@@ -264,7 +264,10 @@ class DateTimePicker extends PureComponent {
                     onChange({ date: dateValue });
                 }
             }).on('dp.hide', () => {
-                updateStateCurrent();
+                jQuery('#nat-calculator .process').fadeOut('slow', function() {
+                    updateStateCurrent();
+                    jQuery(this).slideDown('slow')
+                });
             });
     }
     render() {
@@ -277,7 +280,10 @@ class LoaderCustom extends PureComponent {
         this.timerID = setTimeout(this.tick, 1000);
     }
     tick = () => {
-        this.props.updateStateSeq();
+        jQuery('#nat-calculator .loader').fadeOut('slow', () => {
+            this.props.updateStateSeq();
+            jQuery('#nat-calculator .sucess-react').slideDown('slow');
+        });
     }
     render() {
         return (<div className="loader">
@@ -301,6 +307,7 @@ class ProgressBar extends PureComponent {
         }, 10);
     }
     tick = () => {
+        const { timerID } = this;
         const { onClick } = this.props;
         const { progress, complete } = this.state;
         if (progress < complete) {
@@ -308,8 +315,8 @@ class ProgressBar extends PureComponent {
                 return { progress: prevQ.progress + 1 }
             });
         } else {
-            clearInterval(this.timerID);
-            onClick();
+            clearInterval(timerID);
+            jQuery('#nat-calculator .progress-bar.react').fadeOut('slow', onClick);
         }
     }
     render() {

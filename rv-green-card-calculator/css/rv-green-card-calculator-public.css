@@ -13,7 +13,10 @@
   min-height: 200px;
   align-items: center;
 }
-.main-container .error, #nat-calculator .error, #nat-calc-wrapper .error {
+.main-container .error-react, #nat-calculator .error-react, #nat-calc-wrapper .error-react,
+.main-container .error,
+#nat-calculator .error,
+#nat-calc-wrapper .error {
   background-color: rgba(207, 0, 15, 0.3);
   color: #cf000f;
   border: 1px solid #cf000f;
@@ -23,7 +26,10 @@
   border-radius: 6px;
   margin-top: 20px;
 }
-.main-container .error b, #nat-calculator .error b, #nat-calc-wrapper .error b {
+.main-container .error-react b, #nat-calculator .error-react b, #nat-calc-wrapper .error-react b,
+.main-container .error b,
+#nat-calculator .error b,
+#nat-calc-wrapper .error b {
   display: block;
   margin-bottom: 20px;
 }
@@ -148,22 +154,28 @@
   margin-top: 20px;
   width: 100%;
 }
-#nat-calculator > div .message h4 {
+#nat-calculator > div .message-react h4 {
   font-size: 1rem;
 }
-#nat-calculator > div.success .message {
+#nat-calculator > div.success-react .message-react {
   margin-bottom: 20px;
 }
-#nat-calculator > div.success .message h4.success {
+#nat-calculator > div.success-react .message-react h4.success-react {
   color: red;
+  font-weight: bold;
+  margin-bottom: 0;
 }
-#nat-calculator > div.success .message h4.success b {
+#nat-calculator > div.success-react .message-react h4.success-react b {
   color: #000;
 }
-#nat-calculator > div.success .message span {
+#nat-calculator > div.success-react .message-react h4.valid {
+  margin-bottom: 20px;
+}
+#nat-calculator > div.success-react .message-react span {
   font-size: 0.69rem;
   font-style: italic;
   color: #6d6363;
+  display: block;
 }
 #nat-calculator > div.info {
   background-color: rgba(99, 192, 223, 0.3);
