@@ -103,10 +103,11 @@
   font-size: 1.3rem;
   color: #333;
   font-weight: 300;
-  padding: 0 50px 20px;
+  padding: 0 30px 20px;
 }
 .main-container .process .datecontainer, #nat-calculator .process .datecontainer, #nat-calc-wrapper .process .datecontainer {
-  width: 360px;
+  max-width: 360px;
+  width: 100%;
   margin: 0 auto;
 }
 .main-container .process .datecontainer .form-control, #nat-calculator .process .datecontainer .form-control, #nat-calc-wrapper .process .datecontainer .form-control,
@@ -149,9 +150,7 @@
 #nat-calculator > div {
   text-align: center;
   max-width: 870px;
-  padding: 20px;
   border-radius: 6px;
-  margin-top: 20px;
   width: 100%;
 }
 #nat-calculator > div .message-react h4 {
@@ -181,6 +180,7 @@
   background-color: rgba(99, 192, 223, 0.3);
   border: 1px solid #63C0DF;
   color: #63C0DF;
+  padding: 20px;
 }
 #nat-calculator > div.info h4 {
   margin-bottom: 20px;
@@ -202,7 +202,16 @@
 #nat-calculator .progress-bar.react .bar .filler {
   transition: none;
 }
+#nat-calculator .button.kind {
+  max-width: 300px;
+  height: 70px;
+}
 
+@media all and (max-width: 320px) {
+  #nat-calculator .button.kind {
+    font-size: 1rem;
+  }
+}
 @font-face {
   font-family: "Glyphicons Halflings";
   src: url("./fonts/glyphicons-halflings-regular.eot");

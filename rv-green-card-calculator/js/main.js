@@ -95,15 +95,12 @@ class TwoButtons extends PureComponent {
         yesNo: {
             first: 'Yes',
             second: 'No',
-            style: {}
+            myClassName: ''
         },
         type: {
             first: '2 Years Green Card (Adjustment of Status)',
             second: '10 Years Green Card (Removal of Conditions)',
-            style: {
-                maxWidth: '300px',
-                height: '70px'
-            }
+            myClassName: ' kind'
         }
     }
     updateButton = (val) => {
@@ -125,16 +122,15 @@ class TwoButtons extends PureComponent {
     render() {
         const { updateButton } = this;
         const { current } = this.props;
-        const { first, second, style } = this.state[current];
+        const { first, second, myClassName } = this.state[current];
         return (
             <div class="button-container">
                 <button 
-                    class="button conditional"
-                    style={style} 
-                    onClick={updateButton.bind(this, true)}>{first}</button>
-                <button style={style} 
-                    class="button conditional" 
-                    onClick={updateButton.bind(this, false)}>{second}</button>
+                    class={ "button conditional" + myClassName }
+                    onClick={updateButton.bind(this, true)}>{ first }</button>
+                <button 
+                    class={ "button conditional" + myClassName } 
+                    onClick={ updateButton.bind(this, false)}>{ second }</button>
             </div>
         );
     }
@@ -191,7 +187,7 @@ class DisplayComponent extends PureComponent {
                 divClassName: 'error-react'
             },
             married2YGC: {
-                content: <h4>if you don't have 10 Years Green Card(Removal of Conditions), you are not eligible to apply for citizenship <b>(Call us at 800-872-1458 for help)</b></h4>,
+                content: <h4>If you don't have 10 Years Green Card(Removal of Conditions), you are not eligible to apply for citizenship <b>(Call us at 800-872-1458 for help)</b></h4>,
                 divClassName: 'info'
             }
         }
