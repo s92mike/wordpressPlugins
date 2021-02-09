@@ -11,6 +11,44 @@
     padding: 20px;
     min-height: 200px;
     align-items: center;
+    .error {
+        background-color: rgba(207,0,15, 0.3);
+        color: #cf000f;
+        border: 1px solid #cf000f;
+        text-align: center;
+        width: auto;
+        padding: 20px;
+        border-radius: 6px;
+        margin-top: 20px;
+        b {
+            display: block;
+            margin-bottom: 20px;
+        }
+    }
+    .button {
+        font-weight: 400;
+        max-width: 250px;
+        height: 50px;
+        color: #fff;
+        background: #38a05e;
+        border: 0;
+        vertical-align: middle;
+        line-height: 1em;
+        width: 100%;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 10px;
+        &.conditional {
+            &.selected {
+                color: #39414d;
+                background: transparent;  
+            }
+        }
+        &.orange {
+            background-color: #f28700;
+            display: inline-block;
+        }
+    }
     .progress-bar,
     .page-progress-bar {
         position: absolute;
@@ -40,51 +78,7 @@
             }
         }  
     }
-}
-
-#nat-calc-wrapper {
-    @extend .main-container;
-    .hidden {
-        display: none;
-    }
-    .error {
-        background-color: rgba(207,0,15, 0.3);
-        color: #cf000f;
-        border: 1px solid #cf000f;
-        text-align: center;
-        max-width: 870px;
-        padding: 20px;
-        border-radius: 6px;
-        margin-top: 20px;
-        b {
-            display: block;
-            margin-bottom: 20px;
-        }
-    }
-    .button {
-        font-weight: 400;
-        max-width: 250px;
-        height: 50px;
-        color: #fff;
-        background: #38a05e;
-        border: 0;
-        vertical-align: middle;
-        line-height: 1em;
-        width: 100%;
-        margin-bottom: 10px;
-        &.conditional {
-            &.selected {
-                color: #39414d;
-                background: transparent;  
-            }
-        }
-        &.orange {
-            background-color: #f28700;
-            display: inline-block;
-        }
-    }
     .process {
-        @extend .hidden;
         position: relative;
         width: 100%;
         h4 {
@@ -96,6 +90,7 @@
         .datecontainer {
             width: 360px;
             margin: 0 auto;
+            .form-control,
             .gc_date {
                 border: 1px solid #447c9c;
             }    
@@ -106,6 +101,16 @@
                 margin: 0 auto;
             }
         }
+    }
+}
+
+#nat-calc-wrapper {
+    @extend .main-container;
+    .hidden {
+        display: none;
+    }
+    .process {
+        @extend .hidden;
     }
     .successfull {
         @extend .hidden;
@@ -138,6 +143,54 @@
 
 #nat-calculator {
     @extend .main-container;
+    > div {
+        text-align: center;
+        max-width: 870px;
+        padding: 20px;
+        border-radius: 6px;
+        margin-top: 20px;
+        width: 100%;
+        .message {
+            h4 {
+                font-size: 1rem;
+            }
+        }
+        &.success {
+            .message {
+                margin-bottom: 20px;
+                h4 {
+                    &.success {
+                        color: red;
+                        b {
+                            color: #000;
+                        }
+                    }
+                }
+                span {
+                    font-size: 0.69rem;
+                    font-style: italic;
+                    color: rgb(109, 99, 99);
+                }
+            }
+        }
+        &.info {
+            background-color: rgba(99,192,223, 0.3);
+            border: 1px solid #63C0DF;
+            color: #63C0DF;
+            h4 {
+                margin-bottom: 20px;
+                b {
+                    display: block;
+                }
+            }
+        }
+        &.loader {
+            img {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    }
     .progress-bar {
         left: 50%;
         transform: translate(-50%, -50%);

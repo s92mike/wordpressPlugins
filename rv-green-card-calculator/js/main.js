@@ -1,4 +1,6 @@
 const { Component, PureComponent } = React;
+const __applyForCitizenshipURL = 'https://rapidvisa.com/start-free/';
+const __applyForCitizenshipText = 'applyForCitizenship';
 const __progress = 'progress';
 const __process = 'process';
 const __summary = 'summary';
@@ -11,7 +13,6 @@ const __sequence = [
     __summary
 ]
 const __defaultMain = {
-    dev: true,
     seq: 0,
     data: {
         date: '',
@@ -28,35 +29,84 @@ const __defaultProcess = {
         component: ''
     }]
 }
+const __numberInText = [
+    'zero', 'one', 'two',
+    'three', 'four', 'five'
+]
+
+const yesOrNoText = (flag) => {
+    return flag ? 'Yes' : 'No';
+}
+
+const numberLeadingZero = (num) => {
+    return num < 10 ? '0' + num : num;
+}
+const yearsOfResident = ({ tempYear, yearsToCitizenship }) => {
+    return parseInt(tempYear) + parseInt(yearsToCitizenship);
+}
+const ninetyDaysEarlier = (currentDate) => {
+    return currentDate - 90;
+}
+const displayDateFormat = (currentDate, separator) => {
+    return currentDate.getFullYear() + separator + numberLeadingZero(currentDate.getMonth() + 1) + separator + numberLeadingZero(currentDate.getDate());
+}
+const calculateNaturalization = ({ date = '', yearsToCitizenship = 5 }) => {
+    const currentDate = date.toString().split('-');
+    let convtDate = new Date();
+    if (currentDate.length >= 3) {
+        const tempYear = currentDate[0];
+        const tempMonth = currentDate[1]-1; //monthly starts with zero
+        const tempDay = currentDate[2];
+        convtDate = new Date( tempYear, tempMonth, tempDay );
+        convtDate.setFullYear(yearsOfResident({ tempYear, yearsToCitizenship })); // 5 years for personal or 3 years for thru married to US citizen
+        convtDate.setDate(ninetyDaysEarlier(convtDate.getDate())); //90 calendar days before for the complete your permanent resident    
+    }
+    return displayDateFormat(convtDate, "/");
+}
 
 class Buttons extends PureComponent {
     state = {
-        currentButton: 'startOver',
         startOver: {
             title: 'Start Over',
             className: ''
+        },
+        applyForCitizenship: {
+            title: 'Apply for Citizenship',
+            className: ' orange'
         }
     }
     updateState = () => {
-        if (this.state.currentButton === 'startOver') {
-            this.props.resetState();
+        const { currentButton, resetState } = this.props;
+        if ( currentButton === 'startOver' ) {
+            resetState();
+        } else if ( currentButton === __applyForCitizenshipText ) {
+            window.location = __applyForCitizenshipURL;
         }
     }
     render() {
-        const { currentButton } = this.state;
+        const { currentButton } = this.props;
         const { title, className } = this.state[currentButton];
         return (<button onClick={this.updateState.bind(this)} className={'button conditional' + className }>{ title }</button>);
     }
+}
+
+Buttons.defaultProps = {
+    currentButton: 'startOver'
 }
 class TwoButtons extends PureComponent {
     state = {
         yesNo: {
             first: 'Yes',
-            second: 'No'
+            second: 'No',
+            style: {}
         },
         type: {
             first: '2 Years Green Card (Adjustment of Status)',
-            second: '10 Years Green Card (Removal of Conditions)'
+            second: '10 Years Green Card (Removal of Conditions)',
+            style: {
+                maxWidth: '300px',
+                height: '70px'
+            }
         }
     }
     updateButton = (val) => {
@@ -67,16 +117,24 @@ class TwoButtons extends PureComponent {
         if (validity) {
             onClick({ valid: val });
         }
+        if (type) {
+            onClick({ kind: val })
+        }
         updateStateCurrent({ marriage, val, type });
     }
     render() {
         const { updateButton } = this;
         const { current } = this.props;
-        const { first, second } = this.state[current];
+        const { first, second, style } = this.state[current];
         return (
             <div class="button-container">
-                <button class="button conditional" onClick={updateButton.bind(this, true)}>{first}</button>
-                <button class="button conditional" onClick={updateButton.bind(this, false)}>{second}</button>
+                <button 
+                    class="button conditional"
+                    style={style} 
+                    onClick={updateButton.bind(this, true)}>{first}</button>
+                <button style={style} 
+                    class="button conditional" 
+                    onClick={updateButton.bind(this, false)}>{second}</button>
             </div>
         );
     }
@@ -89,35 +147,110 @@ TwoButtons.defaultProps = {
     type: false,
     updateStateCurrent: ()=>{return null;}
 }
+class Summary extends Component {
+    render() {
+        const { data, natSched, yearsToCitizenship } = this.props;
+        return (<div className='summary'>
+            <h4>Green Card issued: <b>{data.date}</b></h4>
+            <h4>Green Card obtained through marriage to a US citizen: <b>{yesOrNoText(data.married)}</b></h4>
+            <h4>Green Card validity: <b>{yesOrNoText(data.valid)}</b></h4>
+            <h4 className="success">The soonest you can apply for citizenship is: <b>{natSched}</b></h4>
+            <span>(90 days before your {yearsToCitizenship} years permanent residency; Date format: YYYY/MM/DD)</span>
+            {data.kind ? <p><b>Disclaimer: </b>You need a 10 Year Green Card (Removal of Condition) to apply for Naturalization Citizenship (Call us at 800-872-1458 for help)</p> :''}
+        </div>)
+    }
+}
 
-class ErrorDisplay extends PureComponent {
+Summary.defaultProps = {
+    data: {
+        date: '',
+        married: null,
+        valid: null
+    },
+    natSched: '',
+    yearsToCitizenship: ''
+}
+
+class SuccessButton extends PureComponent {
+    toBeDisplay = (flag) => {
+        return flag ? <Buttons currentButton={__applyForCitizenshipText} /> : '';
+    }
+    render() {
+        return (this.toBeDisplay(this.props.flag));
+    }
+}
+
+SuccessButton.defaultProps = {
+    flag: false
+}
+class DisplayComponent extends PureComponent {
     state = {
         message: {
             validity: {
-                content: 'If your green card is no longer valid, you are not eligible to apply for citizenship',
-                bold: '(Call us at 800-872-1458 for help)'
+                content: <h4>If your green card is no longer valid, you are not eligible to apply for citizenship<b>(Call us at 800-872-1458 for help)</b></h4>,
+                divClassName: 'error'
+            },
+            married2YGC: {
+                content: <h4>You need a 5 Years Green Card(Removal of Conditions) to apply for Naturalization Citizenship <b>(Call us at 800-872-1458 for help)</b></h4>,
+                divClassName: 'info'
             }
         }
     }
+    displaySummary = (arg) => {
+        const yearsToCitizenship = arg.married ? 3 : 5;
+        const natSched = calculateNaturalization({ date: arg.date, yearsToCitizenship });
+        return <Summary data={arg} natSched={natSched} yearsToCitizenship={__numberInText[yearsToCitizenship]} />
+    }
+    preDefinedMessage = ({ type, data, forMarried }) => {
+        let display;
+        switch (type) {
+            case 'validity':
+                type = forMarried ? 'married2YGC' : type;
+                display = {
+                    ...this.state.message[type]
+                }
+                break;
+            case 'success':
+                display = {
+                    content: this.displaySummary(data),
+                    divClassName: 'success'
+                }
+                break;
+            default:
+                display = {
+                    content: <h4>No message type of preDefinedMessage function</h4>,
+                    divClassName: 'error'
+                }
+                break;
+        }
+        return display;
+    }
     render() {
         const { type, resetState } = this.props;
-        const { content, bold } = this.state.message[type];
+        const { content, divClassName } = this.preDefinedMessage(this.props);
         return (
-            <div className='error'>
+            <div className={divClassName}>
                 <div className='message'>
-                    <h4>{content}</h4>
-                    <b>{bold}</b>
+                    {content}
                 </div>
                 <div classname='buttons'>
                     <Buttons resetState={resetState} />
+                    <SuccessButton flag={type === 'success'} />
                 </div>
             </div>
         );
     }
 }
 
-ErrorDisplay.defaultProps = {
-    type: 'validity'
+DisplayComponent.defaultProps = {
+    type: 'validity',
+    forMarried: null,
+    data: {
+        date: '',
+        married: null,
+        valid: null,
+        kind: null
+    }
 }
 
 class DateTimePicker extends PureComponent {
@@ -140,11 +273,21 @@ class DateTimePicker extends PureComponent {
 }
 
 class LoaderCustom extends PureComponent {
+    componentDidMount() {
+        this.timerID = setTimeout(this.tick, 1000);
+    }
+    tick = () => {
+        this.props.updateStateSeq();
+    }
     render() {
         return (<div className="loader">
             <img src="/wp-content/plugins/rv-green-card-calculator/images/rapidvisathrobber.gif" alt=""/>
         </div>);
     }
+}
+
+LoaderCustom.defaultProps = {
+    updateStateSeq: () => { return; }
 }
 
 class ProgressBar extends PureComponent {
@@ -183,6 +326,9 @@ class ProgressBar extends PureComponent {
         );
     }
 }
+ProgressBar.defaultProps = {
+    onClick: () => { return; }
+}
 
 class ProcessStep extends PureComponent {
     state = {
@@ -208,15 +354,17 @@ class ProcessStep extends PureComponent {
                 {
                     title: <h4>Did you obtain your green card through marriage to US a citizen?</h4>,
                     component: <TwoButtons 
-                        onClick={updateStateData}
-                        marriage={true} 
+                        marriage={true}
+                        onClick={updateStateData} 
                         updateStateCurrent = {this.updateStateCurrent} />
                 },
                 {
                     title: <h4>What is your current Green Card?</h4>,
                     component: <TwoButtons
                         current='type'
-                        type={true} />
+                        type={true} 
+                        onClick={updateStateData} 
+                        updateStateCurrent = {this.updateStateCurrent}/>
                 }
             ];
             return {
@@ -248,14 +396,22 @@ class ProcessStep extends PureComponent {
     }
 }
 
-class Main extends PureComponent {
+ProcessStep.defaultProps = {
+    married: null,
+    forMarried: null,
+    updateStateData: ()=>{ return; },
+    updateStateSeq: ()=>{ return; }
+}
+
+class Main extends Component {
     state = {
         ...__defaultMain
     }
     componentChanger = () => {
-        const { seq, data: { valid, married } } = this.state;
-        if (valid === false) {
-            return <ErrorDisplay resetState = {this.resetState.bind(this)}/>;
+        const { seq, data: { valid, married, kind }, data } = this.state;
+        const forMarried = married && kind;
+        if (valid === false || forMarried) {
+            return <DisplayComponent forMarried = { forMarried } resetState = { this.resetState.bind(this) }/>;
         }
         switch (__sequence[seq]) {
             case __progress:
@@ -266,7 +422,12 @@ class Main extends PureComponent {
                     updateStateData={this.updateStateData.bind(this)} 
                     updateStateSeq={this.updateStateSeq} />;
             case __loader:
-                return <LoaderCustom />;
+                return <LoaderCustom updateStateSeq={this.updateStateSeq.bind(this)} />;
+            case __summary: 
+                return <DisplayComponent 
+                    data={data}
+                    type='success' 
+                    resetState = {this.resetState.bind(this)}/>;
             default: 
                 return <div className='default'>Nothing!!!</div>;
         }
@@ -293,17 +454,6 @@ class Main extends PureComponent {
         });
     }
     render() {
-        const { dev } = this.state;
-        if (dev) {
-            return (<div>
-                {this.componentChanger()}
-                <div style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0
-                }}><Buttons resetState={this.resetState.bind(this)} /></div>
-            </div>)
-        }
         return (this.componentChanger());
     }
 }
