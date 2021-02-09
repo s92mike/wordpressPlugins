@@ -1,1 +1,1 @@
-<div id="nat-calculator" />
+<div id="nat-calculator"></div>

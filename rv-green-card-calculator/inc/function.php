@@ -1,4 +1,5 @@
 <?php 
+require PLUGIN_PATH . 'inc/class-common.php';
 function ccm_get_template_part($slug, $arg = array(), $name = null) {
     do_action("ccm_get_template_part_{$slug}", $slug, $name);
 
@@ -27,4 +28,10 @@ function ccm_get_template_path($template_names, $load = false, $require_once = t
     if ( $load && '' != $located )
         load_template( $located, $require_once, $arg );
     return $located;
+}
+
+
+function wpdocs_my_add_sri( $html, $handle ) {
+	$common = new Common;
+	return $common->script_attr($html, $handle);
 }
