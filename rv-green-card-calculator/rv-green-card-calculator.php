@@ -27,10 +27,7 @@ function my_enqueues() {
 		wp_enqueue_style( 'datetimepicker', PLUGIN_APP . 'bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css', array(), null, 'all' );
 		//main custom files
 		wp_enqueue_style( 'green-card-calculator', PLUGIN_APP . 'css/rv-green-card-calculator-public.css', array() , filemtime( PLUGIN_PATH . 'css/rv-green-card-calculator-public.css' ), 'all' );
-		wp_enqueue_script( 'green-card-calculator', PLUGIN_APP . 'js/rv-green-card-calculator-public.js' , array(), filemtime( PLUGIN_PATH . 'js/rv-green-card-calculator-public.js' ), true);
-
-
-		//Development
+		//React
 		wp_enqueue_script('react');
 		wp_enqueue_script('react-dom');
 		wp_enqueue_script('babel', 'https://unpkg.com/babel-standalone@6.15.0/babel.min.js', array(), null, true);
@@ -49,4 +46,5 @@ add_action( 'wp_enqueue_scripts', 'my_enqueues', 11 );
 function main_shortcodes() {
 	include("shortcode/calculator.php");
 }
+
 add_action('init','main_shortcodes');
