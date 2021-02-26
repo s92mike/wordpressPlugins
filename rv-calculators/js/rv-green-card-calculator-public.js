@@ -100,16 +100,20 @@
 			}
 			if (currentClass === nameVar.gcm) {
 				yearsToCitizenship = currentValue.toLowerCase() === nameVar.yes ? nameVar.marriageYears : nameVar.personalYears;
-				elementSwitch(2);
+				if (currentValue.toLowerCase() === nameVar.yes) {
+					elementSwitch(3);
+				} else {
+					processNaturalizationDate();
+				}
 			}
 			if (currentClass === nameVar.gcValid) { 
 				gcmDisabled = currentValue.toLowerCase() === nameVar.no ? true : false;
 				disabledElement();
 				clearDisplays([nameVar.successfull, nameVar.message]);
 				if (currentValue.toLowerCase() === nameVar.yes) { 
-					processNaturalizationDate();
+					elementSwitch(2);
 				} else {
-					$('.' + nameVar.steps[3]).slideUp('slow', () => {
+					$('.' + nameVar.steps[2]).slideUp('slow', () => {
 						displayMessage();
 					});
 				}
@@ -196,7 +200,7 @@
 
 		$(nameVar.buttonCondition).click(function () {
 			if (!$(this).hasClass(nameVar.selected)) {
-				const currentClass = $(this).hasClass(nameVar.gcm) ? nameVar.gcm : nameVar.gcValid;
+				const currentClass = $(this).hasClass(nameVar.gcm) ? nameVar.gcm : $(this).hasClass(nameVar.gcValid) ? nameVar.gcValid : 'type';
 				const currentValue = $(this).data(nameVar.answer);
 				gcValidCond({ ifClass: $(this).hasClass(currentClass), currentClass, currentValue });
 				$(this).addClass(nameVar.selected);

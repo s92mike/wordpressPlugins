@@ -13,10 +13,6 @@ function calc_system_main($atts = array(), $content = null, $tag = '') {
     $ver = isset($atts['version']) ? $atts['version'] : 0;
     switch ($ver) {
         case 1:
-            wp_enqueue_script( 'moment');
-            wp_enqueue_script( 'datetimepicker', PLUGIN_APP . 'bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js', array(), null, true );
-            wp_enqueue_style( 'bootstrap', PLUGIN_APP . 'bootstrap-datetimepicker/css/bootstrap.min.css', array(), null, 'all' );
-            wp_enqueue_style( 'datetimepicker', PLUGIN_APP . 'bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css', array(), null, 'all' );
             wp_enqueue_script( 'green-card-calculator', PLUGIN_APP . 'js/rv-green-card-calculator-public.js' , array(), filemtime( PLUGIN_PATH . 'js/rv-green-card-calculator-public.js' ), true);
             $arg = array('src' => PLUGIN_APP . 'images/rapidvisathrobber.gif');
             $ext = 'v1';                   
@@ -34,4 +30,4 @@ function calc_system_main($atts = array(), $content = null, $tag = '') {
     return ob_get_clean();
 }
 
-add_shortcode('green-card-calculator','calc_system_main');
+add_shortcode('nat-sched-calculator','calc_system_main');

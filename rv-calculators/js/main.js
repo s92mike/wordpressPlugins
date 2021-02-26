@@ -283,7 +283,7 @@ class LoaderCustom extends PureComponent {
     }
     render() {
         return (<div className="loader">
-            <img src="/wp-content/plugins/rv-green-card-calculator/images/rapidvisathrobber.gif" alt=""/>
+            <img src="/wp-content/plugins/rv-calculators/images/rapidvisathrobber.gif" alt=""/>
         </div>);
     }
 }

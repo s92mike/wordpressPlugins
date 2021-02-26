@@ -21,6 +21,10 @@ function my_enqueues() {
 	if ($post->post_name === "sample-page") {
 		//Dependencies
 		wp_enqueue_script( 'jquery');
+		wp_enqueue_script( 'moment');
+		wp_enqueue_script( 'datetimepicker', PLUGIN_APP . 'bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js', array(), null, true );
+		wp_enqueue_style( 'bootstrap', PLUGIN_APP . 'bootstrap-datetimepicker/css/bootstrap.min.css', array(), null, 'all' );
+		wp_enqueue_style( 'datetimepicker', PLUGIN_APP . 'bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css', array(), null, 'all' );
 		//main custom files
 		wp_enqueue_style( 'green-card-calculator', PLUGIN_APP . 'css/rv-green-card-calculator-public.css', array() , filemtime( PLUGIN_PATH . 'css/rv-green-card-calculator-public.css' ), 'all' );
 	}
