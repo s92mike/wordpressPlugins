@@ -1,1 +1,1 @@
-<div id="nat-calculator"></div>
+<div id="nat-calculator" data-gif="<?php echo $args['src']; ?>"></div>

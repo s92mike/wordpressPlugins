@@ -1,6 +1,7 @@
 const { Component, PureComponent } = React;
 const __applyForCitizenshipURL = 'https://rapidvisa.com/start-free/';
 const __applyForCitizenshipText = 'applyForCitizenship';
+const __divID = 'nat-calculator';
 const __progress = 'progress';
 const __process = 'process';
 const __summary = 'summary';
@@ -32,6 +33,8 @@ const __numberInText = [
     'zero', 'one', 'two',
     'three', 'four', 'five'
 ]
+const article = document.querySelector('#electric-cars');
+
 const yesOrNoText = (flag) => {
     return flag ? 'Yes' : 'No';
 }
@@ -104,7 +107,7 @@ class TwoButtons extends PureComponent {
         }
     }
     updateButton = (val) => {
-        jQuery('#nat-calculator .process').fadeOut('slow', () => {
+        jQuery('#' + __divID + ' .process').fadeOut('slow', () => {
             const { marriage, validity, onClick, updateStateCurrent, type } = this.props;
             if (marriage) {
                 onClick({ married: val });
@@ -116,7 +119,7 @@ class TwoButtons extends PureComponent {
                 onClick({ kind: val })
             }
             updateStateCurrent({ marriage, val, type });
-            jQuery('#nat-calculator .process').slideDown('slow');
+            jQuery('#' + __divID + ' .process').slideDown('slow');
         });
     }
     render() {
@@ -260,7 +263,7 @@ class DateTimePicker extends PureComponent {
                     onChange({ date: dateValue });
                 }
             }).on('dp.hide', () => {
-                jQuery('#nat-calculator .process').fadeOut('slow', function() {
+                jQuery('#' + __divID + ' .process').fadeOut('slow', function() {
                     updateStateCurrent();
                     jQuery(this).slideDown('slow')
                 });
@@ -276,14 +279,14 @@ class LoaderCustom extends PureComponent {
         this.timerID = setTimeout(this.tick, 1000);
     }
     tick = () => {
-        jQuery('#nat-calculator .loader').fadeOut('slow', () => {
+        jQuery('#' + __divID + ' .loader').fadeOut('slow', () => {
             this.props.updateStateSeq();
-            jQuery('#nat-calculator .sucess-react').slideDown('slow');
+            jQuery('#' + __divID + ' .sucess-react').slideDown('slow');
         });
     }
     render() {
         return (<div className="loader">
-            <img src="/wp-content/plugins/rv-calculators/images/rapidvisathrobber.gif" alt=""/>
+            <img src={dataDiv.dataset.gif} alt=""/>
         </div>);
     }
 }
@@ -312,7 +315,7 @@ class ProgressBar extends PureComponent {
             });
         } else {
             clearInterval(timerID);
-            jQuery('#nat-calculator .progress-bar.react').fadeOut('slow', onClick);
+            jQuery('#' + __divID + ' .progress-bar.react').fadeOut('slow', onClick);
         }
     }
     render() {
@@ -460,4 +463,5 @@ class Main extends Component {
         return (this.componentChanger());
     }
 }
-ReactDOM.render(<Main />, document.getElementById('nat-calculator'));
+const dataDiv = document.querySelector('#' + __divID);
+ReactDOM.render(<Main />, document.getElementById(__divID));
