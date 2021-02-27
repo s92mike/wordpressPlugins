@@ -7,8 +7,9 @@
 			gcm: 'gcm',
 			yes: 'yes',
 			full: 'full',
+			type: 'type',
+			info: 'info',
 			error: 'error',
-			ncSub: 'nc-sub',
 			marriageYears: 3,
 			personalYears: 5,
 			filler: 'filler',
@@ -53,19 +54,24 @@
 				.append('The soonest you can apply for citizenship is: ')
 				.append(bEle);
 			$('.' + nameVar.successfull).html(h4Ele).append(spanDisclaimer).append("<br />").append(bBtn).append(aBtn).prepend(summaryElement);
-			$('.' + nameVar.steps[3]).fadeOut('fast', () => {
+			$('.' + nameVar.steps[currentSteps]).fadeOut('fast', () => {
 				showProgressBar(nameVar.loader);
 			});
 		}
 		const displayMessage = () => {
-			if (gcmDisabled) {
+			const ifStepsIs4 = currentSteps === 4;
+			if (gcmDisabled || ifStepsIs4) {
+				const currentMsg = ifStepsIs4 ? `If you don't have 10 Years Green Card(Removal of Conditions)` : `If your green card is no longer valid`;
+				const currentClass = ifStepsIs4 ? nameVar.info : nameVar.error;
 				const bBtn = $("<button/>")
 					.addClass('button')
 					.html('Start Over')
 					.click(resetButton.bind(this));
 				$('.' + nameVar.message)
-					.addClass(nameVar.error)
-					.html('If your green card is no longer valid, you are not eligible to apply for citizenship<b>(Call us at 800-872-1458 for help)</b>')
+					.removeClass(nameVar.info)
+					.removeClass(nameVar.error)
+					.addClass(currentClass)
+					.html(currentMsg + ', you are not eligible to apply for citizenship<b>(Call us at 800-872-1458 for help)</b>')
 					.append(bBtn)
 					.show();
 			} else {
@@ -87,7 +93,6 @@
 		}
 		const disabledElement = () => {
 			$('.' + nameVar.gcm).prop('disabled', gcmDisabled);
-			$('.' + nameVar.ncSub).prop('disabled', gcmDisabled);
 		}
 		const elementSwitch = (step) => {
 			$('.' + nameVar.steps[step]).slideUp('slow', () => {
@@ -98,25 +103,37 @@
 			if (ifClass) {
 				$('.' + currentClass + nameVar.buttonCondition).removeClass(nameVar.selected);
 			}
-			if (currentClass === nameVar.gcm) {
-				yearsToCitizenship = currentValue.toLowerCase() === nameVar.yes ? nameVar.marriageYears : nameVar.personalYears;
-				if (currentValue.toLowerCase() === nameVar.yes) {
-					elementSwitch(3);
-				} else {
-					processNaturalizationDate();
-				}
-			}
-			if (currentClass === nameVar.gcValid) { 
-				gcmDisabled = currentValue.toLowerCase() === nameVar.no ? true : false;
-				disabledElement();
-				clearDisplays([nameVar.successfull, nameVar.message]);
-				if (currentValue.toLowerCase() === nameVar.yes) { 
-					elementSwitch(2);
-				} else {
-					$('.' + nameVar.steps[2]).slideUp('slow', () => {
-						displayMessage();
-					});
-				}
+			switch (currentClass) {
+				case nameVar.gcm:
+					yearsToCitizenship = currentValue.toLowerCase() === nameVar.yes ? nameVar.marriageYears : nameVar.personalYears;
+					if (currentValue.toLowerCase() === nameVar.yes) {
+						elementSwitch(3);
+					} else {
+						processNaturalizationDate();
+					}
+					break;
+				case nameVar.gcValid:
+					gcmDisabled = currentValue.toLowerCase() === nameVar.no ? true : false;
+					disabledElement();
+					clearDisplays([nameVar.successfull, nameVar.message]);
+					if (currentValue.toLowerCase() === nameVar.yes) { 
+						elementSwitch(2);
+					} else {
+						$('.' + nameVar.steps[2]).slideUp('slow', () => {
+							displayMessage();
+						});
+					}
+					break;
+				case nameVar.type:
+					currentSteps = 4;
+					if (currentValue.toLowerCase() === nameVar.yes) {
+						$('.' + nameVar.steps[currentSteps]).slideUp('slow', () => {
+							displayMessage();
+						});
+					} else {
+						processNaturalizationDate();
+					}
+					break;
 			}
 		}
 		const clearDisplays = (className) => {
@@ -176,6 +193,7 @@
 		const resetButton = () => {
 			showProgressBar(nameVar.steps[1]);
 			gcmDisabled = false;
+			currentSteps = 3;   
 			disabledElement();
 			yearsToCitizenship = nameVar.marriageYears;
 			$( '#' + nameVar.ncDatePicker ).data("DateTimePicker").clear();
@@ -186,6 +204,7 @@
 		/* Process Initialization*/
 		let gcmDisabled = false;
 		let yearsToCitizenship = nameVar.marriageYears;
+		let currentSteps = 3;
 
 		$('#' + nameVar.ncDatePicker).datetimepicker({
 			format: 'YYYY-MM-DD'
@@ -200,20 +219,11 @@
 
 		$(nameVar.buttonCondition).click(function () {
 			if (!$(this).hasClass(nameVar.selected)) {
-				const currentClass = $(this).hasClass(nameVar.gcm) ? nameVar.gcm : $(this).hasClass(nameVar.gcValid) ? nameVar.gcValid : 'type';
+				const currentClass = $(this).hasClass(nameVar.gcm) ? nameVar.gcm : $(this).hasClass(nameVar.gcValid) ? nameVar.gcValid : nameVar.type;
 				const currentValue = $(this).data(nameVar.answer);
 				gcValidCond({ ifClass: $(this).hasClass(currentClass), currentClass, currentValue });
 				$(this).addClass(nameVar.selected);
 			}
-		});
-
-		$( "." + nameVar.ncSub ).click(function(e) {
-			e.preventDefault();
-			if( validateRequiredElement() ) {
-				displayValidation();
-				return;
-			}
-			processNaturalizationDate();
 		});
 
 		$('#' + nameVar.mainWrapper).ready(() => {

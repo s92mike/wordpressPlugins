@@ -33,6 +33,16 @@
   display: block;
   margin-bottom: 20px;
 }
+.main-container .info, #nat-calculator .info, #nat-calc-wrapper .info {
+  background-color: rgba(99, 192, 223, 0.3);
+  border: 1px solid #63C0DF;
+  color: #63C0DF;
+  padding: 20px;
+}
+.main-container .info b, #nat-calculator .info b, #nat-calc-wrapper .info b {
+  display: block;
+  margin-bottom: 20px;
+}
 .main-container .button, #nat-calculator .button, #nat-calc-wrapper .button {
   font-weight: 400;
   max-width: 250px;
@@ -46,6 +56,10 @@
   margin-left: 5px;
   margin-right: 5px;
   margin-bottom: 10px;
+}
+.main-container .button.type, #nat-calculator .button.type, #nat-calc-wrapper .button.type {
+  max-width: 300px;
+  height: 70px;
 }
 .main-container .button.conditional.selected, #nat-calculator .button.conditional.selected, #nat-calc-wrapper .button.conditional.selected {
   color: #39414d;
