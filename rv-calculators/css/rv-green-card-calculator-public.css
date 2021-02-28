@@ -1,5 +1,6 @@
 @charset "UTF-8";
-.main-container, #nat-calculator, #nat-calc-wrapper {
+.main-container, #nat-calculator-2,
+#nat-calculator, #nat-calc-wrapper {
   max-width: 90%;
   display: flex;
   justify-content: center;
@@ -13,8 +14,10 @@
   min-height: 200px;
   align-items: center;
 }
-.main-container .error-react, #nat-calculator .error-react, #nat-calc-wrapper .error-react,
+.main-container .error-react, #nat-calculator-2 .error-react,
+#nat-calculator .error-react, #nat-calc-wrapper .error-react,
 .main-container .error,
+#nat-calculator-2 .error,
 #nat-calculator .error,
 #nat-calc-wrapper .error {
   background-color: rgba(207, 0, 15, 0.3);
@@ -26,24 +29,29 @@
   border-radius: 6px;
   margin-top: 20px;
 }
-.main-container .error-react b, #nat-calculator .error-react b, #nat-calc-wrapper .error-react b,
+.main-container .error-react b, #nat-calculator-2 .error-react b,
+#nat-calculator .error-react b, #nat-calc-wrapper .error-react b,
 .main-container .error b,
+#nat-calculator-2 .error b,
 #nat-calculator .error b,
 #nat-calc-wrapper .error b {
   display: block;
   margin-bottom: 20px;
 }
-.main-container .info, #nat-calculator .info, #nat-calc-wrapper .info {
+.main-container .info, #nat-calculator-2 .info,
+#nat-calculator .info, #nat-calc-wrapper .info {
   background-color: rgba(99, 192, 223, 0.3);
   border: 1px solid #63C0DF;
   color: #63C0DF;
   padding: 20px;
 }
-.main-container .info b, #nat-calculator .info b, #nat-calc-wrapper .info b {
+.main-container .info b, #nat-calculator-2 .info b,
+#nat-calculator .info b, #nat-calc-wrapper .info b {
   display: block;
   margin-bottom: 20px;
 }
-.main-container .button, #nat-calculator .button, #nat-calc-wrapper .button {
+.main-container .button, #nat-calculator-2 .button,
+#nat-calculator .button, #nat-calc-wrapper .button {
   font-weight: 400;
   max-width: 250px;
   height: 50px;
@@ -57,20 +65,25 @@
   margin-right: 5px;
   margin-bottom: 10px;
 }
-.main-container .button.type, #nat-calculator .button.type, #nat-calc-wrapper .button.type {
+.main-container .button.type, #nat-calculator-2 .button.type,
+#nat-calculator .button.type, #nat-calc-wrapper .button.type {
   max-width: 300px;
   height: 70px;
 }
-.main-container .button.conditional.selected, #nat-calculator .button.conditional.selected, #nat-calc-wrapper .button.conditional.selected {
+.main-container .button.conditional.selected, #nat-calculator-2 .button.conditional.selected,
+#nat-calculator .button.conditional.selected, #nat-calc-wrapper .button.conditional.selected {
   color: #39414d;
   background: transparent;
 }
-.main-container .button.orange, #nat-calculator .button.orange, #nat-calc-wrapper .button.orange {
+.main-container .button.orange, #nat-calculator-2 .button.orange,
+#nat-calculator .button.orange, #nat-calc-wrapper .button.orange {
   background-color: #f28700;
   display: inline-block;
 }
-.main-container .progress-bar, #nat-calculator .progress-bar, #nat-calc-wrapper .progress-bar,
+.main-container .progress-bar, #nat-calculator-2 .progress-bar,
+#nat-calculator .progress-bar, #nat-calc-wrapper .progress-bar,
 .main-container .page-progress-bar,
+#nat-calculator-2 .page-progress-bar,
 #nat-calculator .page-progress-bar,
 #nat-calc-wrapper .page-progress-bar {
   position: absolute;
@@ -79,8 +92,10 @@
   width: 90%;
   height: auto;
 }
-.main-container .progress-bar .bar, #nat-calculator .progress-bar .bar, #nat-calc-wrapper .progress-bar .bar,
+.main-container .progress-bar .bar, #nat-calculator-2 .progress-bar .bar,
+#nat-calculator .progress-bar .bar, #nat-calc-wrapper .progress-bar .bar,
 .main-container .page-progress-bar .bar,
+#nat-calculator-2 .page-progress-bar .bar,
 #nat-calculator .page-progress-bar .bar,
 #nat-calc-wrapper .page-progress-bar .bar {
   display: block;
@@ -92,8 +107,10 @@
   border: 2px solid #38a25e;
   padding: 5px;
 }
-.main-container .progress-bar .bar .filler, #nat-calculator .progress-bar .bar .filler, #nat-calc-wrapper .progress-bar .bar .filler,
+.main-container .progress-bar .bar .filler, #nat-calculator-2 .progress-bar .bar .filler,
+#nat-calculator .progress-bar .bar .filler, #nat-calc-wrapper .progress-bar .bar .filler,
 .main-container .page-progress-bar .bar .filler,
+#nat-calculator-2 .page-progress-bar .bar .filler,
 #nat-calculator .page-progress-bar .bar .filler,
 #nat-calc-wrapper .page-progress-bar .bar .filler {
   transition: width 0.9s ease 0.9s;
@@ -103,34 +120,42 @@
   background-color: #38a25e;
   border-radius: 5px;
 }
-.main-container .progress-bar .bar .filler.full, #nat-calculator .progress-bar .bar .filler.full, #nat-calc-wrapper .progress-bar .bar .filler.full,
+.main-container .progress-bar .bar .filler.full, #nat-calculator-2 .progress-bar .bar .filler.full,
+#nat-calculator .progress-bar .bar .filler.full, #nat-calc-wrapper .progress-bar .bar .filler.full,
 .main-container .page-progress-bar .bar .filler.full,
+#nat-calculator-2 .page-progress-bar .bar .filler.full,
 #nat-calculator .page-progress-bar .bar .filler.full,
 #nat-calc-wrapper .page-progress-bar .bar .filler.full {
   width: 100%;
 }
-.main-container .process, #nat-calculator .process, #nat-calc-wrapper .process {
+.main-container .process, #nat-calculator-2 .process,
+#nat-calculator .process, #nat-calc-wrapper .process {
   position: relative;
   width: 100%;
 }
-.main-container .process h4, #nat-calculator .process h4, #nat-calc-wrapper .process h4 {
+.main-container .process h4, #nat-calculator-2 .process h4,
+#nat-calculator .process h4, #nat-calc-wrapper .process h4 {
   font-size: 1.3rem;
   color: #333;
   font-weight: 300;
   padding: 0 30px 20px;
 }
-.main-container .process .datecontainer, #nat-calculator .process .datecontainer, #nat-calc-wrapper .process .datecontainer {
+.main-container .process .datecontainer, #nat-calculator-2 .process .datecontainer,
+#nat-calculator .process .datecontainer, #nat-calc-wrapper .process .datecontainer {
   max-width: 360px;
   width: 100%;
   margin: 0 auto;
 }
-.main-container .process .datecontainer .form-control, #nat-calculator .process .datecontainer .form-control, #nat-calc-wrapper .process .datecontainer .form-control,
+.main-container .process .datecontainer .form-control, #nat-calculator-2 .process .datecontainer .form-control,
+#nat-calculator .process .datecontainer .form-control, #nat-calc-wrapper .process .datecontainer .form-control,
 .main-container .process .datecontainer .gc_date,
+#nat-calculator-2 .process .datecontainer .gc_date,
 #nat-calculator .process .datecontainer .gc_date,
 #nat-calc-wrapper .process .datecontainer .gc_date {
   border: 1px solid #447c9c;
 }
-.main-container .process.loader img, #nat-calculator .process.loader img, #nat-calc-wrapper .process.loader img {
+.main-container .process.loader img, #nat-calculator-2 .process.loader img,
+#nat-calculator .process.loader img, #nat-calc-wrapper .process.loader img {
   display: block;
   margin: 0 auto;
 }
@@ -161,68 +186,81 @@
 #nat-calc-wrapper .successfull .button {
   margin: 0 10px 10px;
 }
+#nat-calculator-2 > div,
 #nat-calculator > div {
   text-align: center;
   max-width: 870px;
   border-radius: 6px;
   width: 100%;
 }
+#nat-calculator-2 > div .message-react h4,
 #nat-calculator > div .message-react h4 {
   font-size: 1rem;
 }
+#nat-calculator-2 > div.success-react .message-react,
 #nat-calculator > div.success-react .message-react {
   margin-bottom: 20px;
 }
+#nat-calculator-2 > div.success-react .message-react h4.success-react,
 #nat-calculator > div.success-react .message-react h4.success-react {
   color: red;
   font-weight: bold;
   margin-bottom: 0;
 }
+#nat-calculator-2 > div.success-react .message-react h4.success-react b,
 #nat-calculator > div.success-react .message-react h4.success-react b {
   color: #000;
 }
+#nat-calculator-2 > div.success-react .message-react h4.valid,
 #nat-calculator > div.success-react .message-react h4.valid {
   margin-bottom: 20px;
 }
+#nat-calculator-2 > div.success-react .message-react span,
 #nat-calculator > div.success-react .message-react span {
   font-size: 0.69rem;
   font-style: italic;
   color: #6d6363;
   display: block;
 }
+#nat-calculator-2 > div.info,
 #nat-calculator > div.info {
   background-color: rgba(99, 192, 223, 0.3);
   border: 1px solid #63C0DF;
   color: #63C0DF;
   padding: 20px;
 }
+#nat-calculator-2 > div.info h4,
 #nat-calculator > div.info h4 {
   margin-bottom: 20px;
 }
+#nat-calculator-2 > div.info h4 b,
 #nat-calculator > div.info h4 b {
   display: block;
 }
+#nat-calculator-2 > div.loader img,
 #nat-calculator > div.loader img {
   display: block;
   margin: 0 auto;
 }
+#nat-calculator-2 .progress-bar,
 #nat-calculator .progress-bar {
   left: 50%;
   transform: translate(-50%, -50%);
-}
-#nat-calculator .progress-bar.react {
   background-color: transparent;
 }
+#nat-calculator-2 .progress-bar.react .bar .filler,
 #nat-calculator .progress-bar.react .bar .filler {
   transition: none;
 }
+#nat-calculator-2 .button.kind,
 #nat-calculator .button.kind {
   max-width: 300px;
   height: 70px;
 }
 
 @media all and (max-width: 320px) {
-  #nat-calculator .button.kind {
+  #nat-calculator-2 .button.kind,
+#nat-calculator .button.kind {
     font-size: 1rem;
   }
 }

@@ -12,6 +12,10 @@ function calc_system_main($atts = array(), $content = null, $tag = '') {
     $ext = null;
     $ver = isset($atts['version']) ? $atts['version'] : 0;
     switch ($ver) {
+        case 2:
+            wp_enqueue_script( 'rv-calculator-1', PLUGIN_APP . 'js/rv-calculator.js' , array(), filemtime( PLUGIN_PATH . 'js/rv-calculator.js' ), true);
+            $ext = 'v2';
+            break;
         case 1:
             wp_enqueue_script('react');
             wp_enqueue_script('react-dom');

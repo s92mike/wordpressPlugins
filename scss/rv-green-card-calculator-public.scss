@@ -156,7 +156,7 @@
         @extend .hidden;
     }
 }
-
+#nat-calculator-2,
 #nat-calculator {
     @extend .main-container;
     > div {
@@ -215,8 +215,8 @@
     .progress-bar {
         left: 50%;
         transform: translate(-50%, -50%);
+        background-color: transparent;
         &.react{
-            background-color: transparent;
             .bar {
                 .filler {
                     transition:none;
@@ -233,6 +233,7 @@
 }
 
 @media all and (max-width: 320px) {
+    #nat-calculator-2,
     #nat-calculator {
         .button {
             &.kind {

@@ -37,7 +37,7 @@
 		/* Functions */
 		const displaySuccessfull = (schedDate) => {
 			const summaryElement = $("<div/>")
-				.html("Green Card issued: <b>" + $('.' + nameVar.gcDate).val().toString() + "</b>")
+				.html("Green Card issued: <b>" + $('#' + nameVar.mainWrapper + ' .' + nameVar.gcDate).val().toString() + "</b>")
 				.append("<br/>Green Card obtained through marriage to a US citizen: <b>" + (yearsToCitizenship===3 ? "Yes" : "No") + "</b>")
 				.append("<br/>Green Card validity: <b>Yes</b>");
 			const spanDisclaimer = $("<span/>").html('(90 days before your ' + convertLess10(yearsToCitizenship) + ' years permanent residency; Date format: YYYY/MM/DD)');
@@ -53,8 +53,8 @@
 			const h4Ele = $("<h3/>")
 				.append('The soonest you can apply for citizenship is: ')
 				.append(bEle);
-			$('.' + nameVar.successfull).html(h4Ele).append(spanDisclaimer).append("<br />").append(bBtn).append(aBtn).prepend(summaryElement);
-			$('.' + nameVar.steps[currentSteps]).fadeOut('fast', () => {
+			$('#' + nameVar.mainWrapper + ' .' + nameVar.successfull).html(h4Ele).append(spanDisclaimer).append("<br />").append(bBtn).append(aBtn).prepend(summaryElement);
+			$('#' + nameVar.mainWrapper + ' .' + nameVar.steps[currentSteps]).fadeOut('fast', () => {
 				showProgressBar(nameVar.loader);
 			});
 		}
@@ -67,7 +67,7 @@
 					.addClass('button')
 					.html('Start Over')
 					.click(resetButton.bind(this));
-				$('.' + nameVar.message)
+				$('#' + nameVar.mainWrapper + ' .' + nameVar.message)
 					.removeClass(nameVar.info)
 					.removeClass(nameVar.error)
 					.addClass(currentClass)
@@ -75,11 +75,11 @@
 					.append(bBtn)
 					.show();
 			} else {
-				$('.' + nameVar.message).html('').hide();
+				$('#' + nameVar.mainWrapper + ' .' + nameVar.message).html('').hide();
 			}
 		}
 		const displayValidation = () => {
-			$('.' + nameVar.message)
+			$('#' + nameVar.mainWrapper + ' .' + nameVar.message)
 				.addClass(nameVar.error)
 				.html('Green card issued date is empty!')
 				.show()
@@ -89,19 +89,19 @@
 				});
 		}
 		const validateRequiredElement = () => {	
-			return !$('.' + nameVar.gcDate).val().toString().length;
+			return !$('#' + nameVar.mainWrapper + ' .' + nameVar.gcDate).val().toString().length;
 		}
 		const disabledElement = () => {
-			$('.' + nameVar.gcm).prop('disabled', gcmDisabled);
+			$('#' + nameVar.mainWrapper + ' .' + nameVar.gcm).prop('disabled', gcmDisabled);
 		}
 		const elementSwitch = (step) => {
-			$('.' + nameVar.steps[step]).slideUp('slow', () => {
-				$('.' + nameVar.steps[step + 1]).fadeIn('fast');
+			$('#' + nameVar.mainWrapper + ' .' + nameVar.steps[step]).slideUp('slow', () => {
+				$('#' + nameVar.mainWrapper + ' .' + nameVar.steps[step + 1]).fadeIn('fast');
 			});
 		}
 		const gcValidCond = ({ ifClass, currentClass, currentValue }) => {
 			if (ifClass) {
-				$('.' + currentClass + nameVar.buttonCondition).removeClass(nameVar.selected);
+				$('#' + nameVar.mainWrapper + ' .' + currentClass + nameVar.buttonCondition).removeClass(nameVar.selected);
 			}
 			switch (currentClass) {
 				case nameVar.gcm:
@@ -119,7 +119,7 @@
 					if (currentValue.toLowerCase() === nameVar.yes) { 
 						elementSwitch(2);
 					} else {
-						$('.' + nameVar.steps[2]).slideUp('slow', () => {
+						$('#' + nameVar.mainWrapper + ' .' + nameVar.steps[2]).slideUp('slow', () => {
 							displayMessage();
 						});
 					}
@@ -127,7 +127,7 @@
 				case nameVar.type:
 					currentSteps = 4;
 					if (currentValue.toLowerCase() === nameVar.yes) {
-						$('.' + nameVar.steps[currentSteps]).slideUp('slow', () => {
+						$('#' + nameVar.mainWrapper + ' .' + nameVar.steps[currentSteps]).slideUp('slow', () => {
 							displayMessage();
 						});
 					} else {
@@ -138,7 +138,7 @@
 		}
 		const clearDisplays = (className) => {
 			$.each(className, (ind, value)=>{
-				$('.' + value).removeClass(nameVar.error).data("index", ind).html('').hide();
+				$('#' + nameVar.mainWrapper + ' .' + value).removeClass(nameVar.error).data("index", ind).html('').hide();
 			});
 		}
 		const numberLeadingZero = (num) => {
@@ -157,7 +157,7 @@
 			return currentDate.getFullYear() + separator + numberLeadingZero(currentDate.getMonth() + 1) + separator + numberLeadingZero(currentDate.getDate());
 		}
 		const processNaturalizationDate = () => {
-			const currentDate = $('.' + nameVar.gcDate).val().toString().split('-');
+			const currentDate = $('#' + nameVar.mainWrapper + ' .' + nameVar.gcDate).val().toString().split('-');
 			const tempYear = currentDate[0];
 			const tempMonth = currentDate[1]-1; //monthly starts with zero
 			const tempDay = currentDate[2];
@@ -168,21 +168,21 @@
 		}
 		const showProgressBar = (showFlag = false) => {
 			if (showFlag === nameVar.loader) {
-				$('.' + nameVar.loader).show().delay(1500).fadeOut('slow', () =>  {
-					$('.' + nameVar.successfull).slideDown('slow');
+				$('#' + nameVar.mainWrapper + ' .' + nameVar.loader).show().delay(1500).fadeOut('slow', () =>  {
+					$('#' + nameVar.mainWrapper + ' .' + nameVar.successfull).slideDown('slow');
 				});
 			} else {
 				const withFiller = '.' + nameVar.progressBar + ' .' + nameVar.filler;
-				$('.' + nameVar.progressBar).show();
+				$('#' + nameVar.mainWrapper + ' .' + nameVar.progressBar).show();
 				$(withFiller).delay(1500).addClass(nameVar.full);
-				$('.' + nameVar.progressBar).delay(2400).fadeOut('slow', () => {
+				$('#' + nameVar.mainWrapper + ' .' + nameVar.progressBar).delay(2400).fadeOut('slow', () => {
 					$(withFiller).removeClass(nameVar.full);
 					switch (showFlag) {
 						case nameVar.successfull:
-							$('.' + nameVar.successfull).slideDown('slow');
+							$('#' + nameVar.mainWrapper + ' .' + nameVar.successfull).slideDown('slow');
 							break;
 						case nameVar.steps[1]:
-							$('.' + nameVar.steps[1]).slideDown('slow');
+							$('#' + nameVar.mainWrapper + ' .' + nameVar.steps[1]).slideDown('slow');
 							break;
 						default:
 							break;
@@ -206,15 +206,17 @@
 		let yearsToCitizenship = nameVar.marriageYears;
 		let currentSteps = 3;
 
-		$('#' + nameVar.ncDatePicker).datetimepicker({
+		$('#' + nameVar.mainWrapper + ' #' + nameVar.ncDatePicker).datetimepicker({
 			format: 'YYYY-MM-DD'
-	  	}).on('dp.change', function () {
+	  }).on('dp.change', function () {
 			if ($(this).val().length > 0) {
 				clearDisplays([nameVar.successfull, nameVar.message]);
 				$(this).data("DateTimePicker").hide();
 			}
 		}).on('dp.hide', function () {
-			setTimeout(2000, elementSwitch(1));
+			if ($(this).val().length > 0) {
+				setTimeout(2000, elementSwitch(1));
+			}
 		});
 
 		$(nameVar.buttonCondition).click(function () {
@@ -228,7 +230,7 @@
 
 		$('#' + nameVar.mainWrapper).ready(() => {
 			showProgressBar();
-			$('.' + nameVar.steps[1]).delay(2400).slideDown('fast');
+			$('#' + nameVar.mainWrapper + ' .' + nameVar.steps[1]).delay(2400).slideDown('fast');
 		});
 
 	});	

@@ -122,7 +122,7 @@ class TwoButtons extends PureComponent {
                 onClick({ kind: val })
             }
             updateStateCurrent({ marriage, val, type });
-            jQuery('#' + __divID + ' .process').slideDown('slow');
+            2('#' + __divID + ' .process').slideDown('slow');
         });
     }
     render() {
@@ -258,18 +258,21 @@ DisplayComponent.defaultProps = {
 class DateTimePicker extends PureComponent {
     componentDidMount() {
         const { onChange, updateStateCurrent } = this.props;
-        jQuery('#datetimepicker')
+        jQuery('#' + __divID + ' #datetimepicker')
             .datetimepicker({ format: 'YYYY-MM-DD' })
             .on('dp.change', function () {
                 const dateValue = jQuery(this).val();
                 if ( dateValue.length > 0 ) {
                     onChange({ date: dateValue });
                 }
-            }).on('dp.hide', () => {
-                jQuery('#' + __divID + ' .process').fadeOut('slow', function() {
-                    updateStateCurrent();
-                    jQuery(this).slideDown('slow')
-                });
+            }).on('dp.hide', function () {
+                const dateValue = jQuery(this).val();
+                if ( dateValue.length > 0 ) {
+                    jQuery('#' + __divID + ' .process').fadeOut('slow', function() {
+                        updateStateCurrent();
+                        jQuery(this).slideDown('slow')
+                    });
+                }
             });
     }
     render() {
