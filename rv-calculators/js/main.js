@@ -1,3 +1,6 @@
+/*
+    For react Coding
+*/
 const { Component, PureComponent } = React;
 const __applyForCitizenshipURL = 'https://rapidvisa.com/start-free/';
 const __applyForCitizenshipText = 'applyForCitizenship';

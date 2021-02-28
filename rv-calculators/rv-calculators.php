@@ -17,8 +17,7 @@ define("PLUGIN_PATH", plugin_dir_path(__FILE__)); //Plugin Directory Path
 require PLUGIN_PATH . 'inc/class-common.php';
 
 function my_enqueues() {
-	global $post;
-	if ($post->post_name === "sample-page") {
+	if ( shortcode_exists( 'nat-sched-calculator' ) ) {
 		//Dependencies
 		wp_enqueue_script( 'jquery');
 		wp_enqueue_script( 'moment');
