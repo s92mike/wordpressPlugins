@@ -21,18 +21,18 @@ function my_enqueues() {
 		//Dependencies
 		wp_enqueue_script( 'jquery');
 		wp_enqueue_script( 'moment');
-		wp_enqueue_script( 'datetimepicker', PLUGIN_APP . 'bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js', array(), null, true );
-		wp_enqueue_style( 'bootstrap', PLUGIN_APP . 'bootstrap-datetimepicker/css/bootstrap.min.css', array(), null, 'all' );
-		wp_enqueue_style( 'datetimepicker', PLUGIN_APP . 'bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css', array(), null, 'all' );
+		wp_enqueue_script( 'datetimepicker', PLUGIN_APP . 'dist/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js', array(), null, true );
+		wp_enqueue_style( 'bootstrap', PLUGIN_APP . 'dist/bootstrap-datetimepicker/css/bootstrap.min.css', array(), null, 'all' );
+		wp_enqueue_style( 'datetimepicker', PLUGIN_APP . 'dist/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css', array(), null, 'all' );
 		//main custom files
-		wp_enqueue_style( 'green-card-calculator', PLUGIN_APP . 'css/rv-green-card-calculator-public.css', array() , filemtime( PLUGIN_PATH . 'css/rv-green-card-calculator-public.css' ), 'all' );
+		wp_enqueue_style( 'green-card-calculator', PLUGIN_APP . 'css/date-calculator-naturalization.css', array() , filemtime( PLUGIN_PATH . 'css/date-calculator-naturalization.css' ), 'all' );
 	}
 }
 
 add_action( 'wp_enqueue_scripts', 'my_enqueues', 11 );
 
 function main_shortcodes() {
-	include("shortcode/calculator.php");
+	include("shortcode/calculators.php");
 }
 
 add_action('init','main_shortcodes');

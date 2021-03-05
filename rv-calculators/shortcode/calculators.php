@@ -6,25 +6,29 @@ define("PLUGIN_PATH", plugin_dir_path(__FILE__)); //Plugin Directory Path
 
 require PLUGIN_PATH . 'inc/function.php';
 
-function calc_system_main($atts = array(), $content = null, $tag = '') {
+/**
+ * Date Calculator for Naturalization
+ */
+
+function date_calculator_naturalization($atts = array(), $content = null, $tag = '') {
     ob_start();
     $arg = array('src' => PLUGIN_APP . 'images/rapidvisathrobber.gif');
     $ext = null;
     $ver = isset($atts['version']) ? $atts['version'] : 0;
     switch ($ver) {
         case 2:
-            wp_enqueue_script( 'rv-calculator-1', PLUGIN_APP . 'js/rv-calculator.js' , array(), filemtime( PLUGIN_PATH . 'js/rv-calculator.js' ), true);
+            wp_enqueue_script( 'classes-date-calc-nat', PLUGIN_APP . 'js/classes-date-calculator-naturalization.js' , array(), filemtime( PLUGIN_PATH . 'js/classes-date-calculator-naturalization.js' ), true);
             $ext = 'v2';
             break;
         case 1:
             wp_enqueue_script('react');
             wp_enqueue_script('react-dom');
             wp_enqueue_script('babel', 'https://unpkg.com/babel-standalone@6.15.0/babel.min.js', array(), null, true);
-            wp_enqueue_script( 'main', PLUGIN_APP . 'js/main.js' , array(), filemtime( PLUGIN_PATH . 'js/main.js' ), true);
+            wp_enqueue_script( 'react-date-calc-nat', PLUGIN_APP . 'js/react-date-calculator-naturalization.js' , array(), filemtime( PLUGIN_PATH . 'js/react-date-calculator-naturalization.js' ), true);
             add_filter( 'script_loader_tag', __NAMESPACE__ . '\\wpdocs_my_add_sri', 10, 2 );
             break;
         default:
-            wp_enqueue_script( 'green-card-calculator', PLUGIN_APP . 'js/rv-green-card-calculator-public.js' , array(), filemtime( PLUGIN_PATH . 'js/rv-green-card-calculator-public.js' ), true);
+            wp_enqueue_script( 'date-calc-nat', PLUGIN_APP . 'js/date-calculator-naturalization.js' , array(), filemtime( PLUGIN_PATH . 'js/date-calculator-naturalization.js' ), true);
             $ext = 'v1';  
             break;
     }
@@ -32,4 +36,4 @@ function calc_system_main($atts = array(), $content = null, $tag = '') {
     return ob_get_clean();
 }
 
-add_shortcode('nat-sched-calculator','calc_system_main');
+add_shortcode('nat-sched-calculator','date_calculator_naturalization');

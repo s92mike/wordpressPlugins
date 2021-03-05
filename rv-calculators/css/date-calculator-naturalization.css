@@ -258,6 +258,10 @@
   height: 70px;
 }
 
+#nat-calculator-2 .progress-bar .bar .filler {
+  transition: none;
+}
+
 @media all and (max-width: 320px) {
   #nat-calculator-2 .button.kind,
 #nat-calculator .button.kind {

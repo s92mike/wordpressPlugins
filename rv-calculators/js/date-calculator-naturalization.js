@@ -78,19 +78,6 @@
 				$('#' + nameVar.mainWrapper + ' .' + nameVar.message).html('').hide();
 			}
 		}
-		const displayValidation = () => {
-			$('#' + nameVar.mainWrapper + ' .' + nameVar.message)
-				.addClass(nameVar.error)
-				.html('Green card issued date is empty!')
-				.show()
-				.delay(3000)
-				.slideUp('slow', function () {
-					$(this).removeClass(nameVar.error);
-				});
-		}
-		const validateRequiredElement = () => {	
-			return !$('#' + nameVar.mainWrapper + ' .' + nameVar.gcDate).val().toString().length;
-		}
 		const disabledElement = () => {
 			$('#' + nameVar.mainWrapper + ' .' + nameVar.gcm).prop('disabled', gcmDisabled);
 		}

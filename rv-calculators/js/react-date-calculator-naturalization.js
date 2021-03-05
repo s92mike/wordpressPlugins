@@ -122,7 +122,7 @@ class TwoButtons extends PureComponent {
                 onClick({ kind: val })
             }
             updateStateCurrent({ marriage, val, type });
-            2('#' + __divID + ' .process').slideDown('slow');
+            jQuery('#' + __divID + ' .process').slideDown('slow');
         });
     }
     render() {

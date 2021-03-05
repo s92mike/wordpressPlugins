@@ -37,3 +37,8 @@
     <div class="successfull"></div>
     <div class="message"></div>
 </div>
+<!-- let greenCardIssued = '';
+  let valid = null;
+  let truMarriage = null;
+  let currentGC = null;
+   -->
