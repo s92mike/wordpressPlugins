@@ -1,0 +1,12 @@
+.app-calculators-container {
+  padding: 20px;
+}
+.app-calculators-container article hr {
+  padding-bottom: 30px;
+}
+.app-calculators-container article .nav.nav-tabs .nav-item .nav-link:active, .app-calculators-container article .nav.nav-tabs .nav-item .nav-link:focus {
+  border: 0;
+}
+.app-calculators-container article .tab-pane {
+  padding: 20px;
+}

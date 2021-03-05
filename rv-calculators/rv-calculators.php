@@ -16,6 +16,19 @@ define("PLUGIN_PATH", plugin_dir_path(__FILE__)); //Plugin Directory Path
 
 require PLUGIN_PATH . 'inc/class-common.php';
 
+add_action( 'admin_menu', 'add_rv_calculator_custom_menu' );
+function add_rv_calculator_custom_menu()  {
+	//Create Income Calculator Menu on Admin Dashboard
+	add_menu_page('RapidVisa Calculators Application','RapidVisa Calculators','manage_options','app_rv_calc','open_main_page_rv','dashicons-welcome-widgets-menus','10');
+}
+function open_main_page_rv() {
+	include("admin/main_page.php");
+	wp_enqueue_style( 'bootstrap', PLUGIN_APP . 'dist/bootstrap-datetimepicker/css/bootstrap.min.css', array(), null, 'all' );
+	wp_enqueue_script( 'boostrap', PLUGIN_APP . 'dist/bootstrap-datetimepicker/js/bootstrap.min.js', array(), null, true );
+	wp_enqueue_style( 'admin-rv-calc', PLUGIN_APP . 'admin/css/admin-rv-calc.css', array(), null, 'all' );
+}
+
+add_action( 'wp_enqueue_scripts', 'my_enqueues', 11 );
 function my_enqueues() {
 	if ( shortcode_exists( 'nat-sched-calculator' ) ) {
 		//Dependencies
@@ -29,10 +42,7 @@ function my_enqueues() {
 	}
 }
 
-add_action( 'wp_enqueue_scripts', 'my_enqueues', 11 );
-
+add_action('init','main_shortcodes');
 function main_shortcodes() {
 	include("shortcode/calculators.php");
 }
-
-add_action('init','main_shortcodes');
