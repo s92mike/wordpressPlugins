@@ -7,14 +7,26 @@ if ( ! class_exists( 'Common' ) ) {
                 case 'ui':
                     $html = str_replace( " id='ui-js'>", " id='ui-js' integrity='sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=' crossorigin='anonymous' />", $html ); 
                     break;
-                case 'main':
-                    $html = str_replace( " id='main-js'>", " id='main-js' type='text/babel' />", $html ); 
+                case 'react-date-calc-nat':
+                    $html = str_replace( " id='react-date-calc-nat-js'>", " id='react-date-calc-nat-js' type='text/babel' />", $html ); 
                     break;
                 default:
                     break;
             }
             return $html;
         }
-
+        public function get_shortcodes() {
+            global $shortcode_tags;
+            $shortcodes = $shortcode_tags;
+            $tmp = [];
+            // sort the shortcodes with alphabetical order
+            ksort($shortcodes);
+            foreach ($shortcodes as $shortcode => $value){
+                if (strpos($shortcode, 'rv') !== false) {
+                    $tmp[] = $shortcode;
+                }
+            }
+            return $tmp;
+        }
     }
 }

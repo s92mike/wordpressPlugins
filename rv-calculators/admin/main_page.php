@@ -11,14 +11,16 @@
           </tr>
         </thead>
         <tbody>
+<?php
+        foreach ($shortcodes as $index => $shortcode):
+?>
           <tr>
-            <td>Date Calculator for Naturalization</td>
-            <td>[nat-sched-calculator]</td>
+            <td><?php echo $shortTitleList[$shortcode]?></td>
+            <td>[<?php echo $shortcode; ?>]</td>
           </tr>
-          <tr>
-            <td>Removal of Conditions Early Filing Date Calculator</td>
-            <td>[roc-calculator]</td>
-          </tr>
+<?php
+        endforeach;
+?>
         </tbody>
       </table>
     </div>

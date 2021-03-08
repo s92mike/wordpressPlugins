@@ -22,6 +22,15 @@ function add_rv_calculator_custom_menu()  {
 	add_menu_page('RapidVisa Calculators Application','RapidVisa Calculators','manage_options','app_rv_calc','open_main_page_rv','dashicons-welcome-widgets-menus','10');
 }
 function open_main_page_rv() {
+	$common = new Common();
+	$shortcodes = $common->get_shortcodes();
+	// sort the shortcodes with alphabetical order
+	ksort($shortcodes);
+	$shortTitleList = [
+		'rv-nat-sched-calculator' => 'Date Calculator for Naturalization',
+		'rv-roc-calculator' => 'Removal of Conditions Early Filing Date Calculator	'
+	];
+
 	include("admin/main_page.php");
 	wp_enqueue_style( 'bootstrap', PLUGIN_APP . 'dist/bootstrap-datetimepicker/css/bootstrap.min.css', array(), null, 'all' );
 	wp_enqueue_script( 'boostrap', PLUGIN_APP . 'dist/bootstrap-datetimepicker/js/bootstrap.min.js', array(), null, true );
@@ -30,15 +39,15 @@ function open_main_page_rv() {
 
 add_action( 'wp_enqueue_scripts', 'my_enqueues', 11 );
 function my_enqueues() {
-	if ( shortcode_exists( 'nat-sched-calculator' ) ) {
+	$common = new Common();
+	$shortcodes = $common->get_shortcodes();
+	if ( shortcode_exists( $shortcodes[0] ) ) {
 		//Dependencies
 		wp_enqueue_script( 'jquery');
 		wp_enqueue_script( 'moment');
 		wp_enqueue_script( 'datetimepicker', PLUGIN_APP . 'dist/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js', array(), null, true );
 		wp_enqueue_style( 'bootstrap', PLUGIN_APP . 'dist/bootstrap-datetimepicker/css/bootstrap.min.css', array(), null, 'all' );
 		wp_enqueue_style( 'datetimepicker', PLUGIN_APP . 'dist/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css', array(), null, 'all' );
-		//main custom files
-		wp_enqueue_style( 'green-card-calculator', PLUGIN_APP . 'css/date-calculator-naturalization.css', array() , filemtime( PLUGIN_PATH . 'css/date-calculator-naturalization.css' ), 'all' );
 	}
 }
 

@@ -32,8 +32,26 @@ function date_calculator_naturalization($atts = array(), $content = null, $tag =
             $ext = 'v1';  
             break;
     }
+    wp_enqueue_style( 'green-card-calculator', PLUGIN_APP . 'css/date-calculator-naturalization.css', array() , filemtime( PLUGIN_PATH . 'css/date-calculator-naturalization.css' ), 'all' );
     ccm_get_template_part('template-sections/calculator', $arg, $ext);
     return ob_get_clean();
 }
 
-add_shortcode('nat-sched-calculator','date_calculator_naturalization');
+add_shortcode('rv-nat-sched-calculator','date_calculator_naturalization');
+
+
+/**
+ * Removal of Conditions
+ */
+
+ function roc_calculator($atts = array(), $content = null, $tag = '') {
+    ob_start();
+    wp_enqueue_style( 'roc-calculator', PLUGIN_APP . 'css/roc-calculator.css', array() , filemtime( PLUGIN_PATH . 'css/roc-calculator.css' ), 'all' );
+    wp_enqueue_script( 'classes-roc-calcutor', PLUGIN_APP . 'js/classes-roc-calcutor.js' , array(), filemtime( PLUGIN_PATH . 'js/classes-roc-calcutor.js' ), true);
+    $arg = array('src' => PLUGIN_APP . 'images/rapidvisathrobber.gif');
+    $ext = 'roc';
+    ccm_get_template_part('template-sections/calculator', $arg, $ext);
+    return ob_get_clean();
+ }
+
+ add_shortcode('rv-roc-calculator', 'roc_calculator');
