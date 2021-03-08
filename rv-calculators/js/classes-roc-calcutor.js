@@ -122,7 +122,7 @@
       const mainDiv = this.divElement({ className: `success` });
       const infoDiv = this.divElement({ className: `info` });
       const bEle = this.bElement({ value: formatDateMoment({  currentDate: ___greenCardExpire}) })
-      infoDiv.append(`2 Year green card expire date: `).append(bEle);
+      infoDiv.append(`2 Year green card expiry date: `).append(bEle);
       const bEleSoonest = this.bElement({ value: formatDateMoment({ currentDate })});
       const h4EleSoonest = this.h4Element({ value: `The soonest you can file for removal of conditions is: `}).addClass(`output`).append(bEleSoonest);
       const aBtn = this.aButton({ 
