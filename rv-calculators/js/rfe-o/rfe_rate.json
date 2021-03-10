@@ -1,0 +1,808 @@
+[
+	{
+		"country": "Afghanistan",
+		"score": "50"
+	},
+	{
+		"country": "Albania",
+		"score": "10"
+	},
+	{
+		"country": "Algeria",
+		"score": "50"
+	},
+	{
+		"country": "American Samoa",
+		"score": "10"
+	},
+	{
+		"country": "Andorra",
+		"score": "10"
+	},
+	{
+		"country": "Angola",
+		"score": "30"
+	},
+	{
+		"country": "Antigua & Barbuda",
+		"score": "40"
+	},
+	{
+		"country": "Argentina",
+		"score": "10"
+	},
+	{
+		"country": "Armenia",
+		"score": "10"
+	},
+	{
+		"country": "Aruba",
+		"score": "10"
+	},
+	{
+		"country": "Australia",
+		"score": "10"
+	},
+	{
+		"country": "Austria",
+		"score": "10"
+	},
+	{
+		"country": "Azerbaijan",
+		"score": "40"
+	},
+	{
+		"country": "Bahamas",
+		"score": "40"
+	},
+	{
+		"country": "Bahrain",
+		"score": "40"
+	},
+	{
+		"country": "Bangladesh",
+		"score": "30"
+	},
+	{
+		"country": "Barbados",
+		"score": "40"
+	},
+	{
+		"country": "Belarus",
+		"score": "10"
+	},
+	{
+		"country": "Belgium",
+		"score": "10"
+	},
+	{
+		"country": "Belize",
+		"score": "10"
+	},
+	{
+		"country": "Benin",
+		"score": "50"
+	},
+	{
+		"country": "Bermuda",
+		"score": "40"
+	},
+	{
+		"country": "Bhutan",
+		"score": "40"
+	},
+	{
+		"country": "Bolivia",
+		"score": "10"
+	},
+	{
+		"country": "Bosnia and Herzegovina",
+		"score": "10"
+	},
+	{
+		"country": "Botswana",
+		"score": "40"
+	},
+	{
+		"country": "Brazil",
+		"score": "10"
+	},
+	{
+		"country": "Brunei",
+		"score": "10"
+	},
+	{
+		"country": "Bulgaria",
+		"score": "10"
+	},
+	{
+		"country": "Burkina Faso",
+		"score": "50"
+	},
+	{
+		"country": "Burundi",
+		"score": "50"
+	},
+	{
+		"country": "Cambodia",
+		"score": "10"
+	},
+	{
+		"country": "Cameroon",
+		"score": "50"
+	},
+	{
+		"country": "Canada",
+		"score": "10"
+	},
+	{
+		"country": "Cape Verde",
+		"score": "10"
+	},
+	{
+		"country": "Cayman Islands",
+		"score": "10"
+	},
+	{
+		"country": "Central African Republic",
+		"score": "50"
+	},
+	{
+		"country": "Chad",
+		"score": "50"
+	},
+	{
+		"country": "Chile",
+		"score": "10"
+	},
+	{
+		"country": "China",
+		"score": "10"
+	},
+	{
+		"country": "Colombia",
+		"score": "10"
+	},
+	{
+		"country": "Congo, Democratic Republic of the",
+		"score": "50"
+	},
+	{
+		"country": "Congo, Republic of",
+		"score": "50"
+	},
+	{
+		"country": "Costa Rica",
+		"score": "10"
+	},
+	{
+		"country": "Croatia",
+		"score": "10"
+	},
+	{
+		"country": "Cuba",
+		"score": "30"
+	},
+	{
+		"country": "Cyprus",
+		"score": "10"
+	},
+	{
+		"country": "Czech Republic",
+		"score": "10"
+	},
+	{
+		"country": "Denmark",
+		"score": "10"
+	},
+	{
+		"country": "Djibouti",
+		"score": "50"
+	},
+	{
+		"country": "Dominican Republic",
+		"score": "10"
+	},
+	{
+		"country": "Ecuador",
+		"score": "10"
+	},
+	{
+		"country": "Egypt",
+		"score": "50"
+	},
+	{
+		"country": "El Salvador",
+		"score": "10"
+	},
+	{
+		"country": "Equatorial Guinea",
+		"score": "50"
+	},
+	{
+		"country": "Eritrea",
+		"score": "50"
+	},
+	{
+		"country": "Estonia",
+		"score": "10"
+	},
+	{
+		"country": "Ethiopia",
+		"score": "40"
+	},
+	{
+		"country": "Falkland Islands",
+		"score": "10"
+	},
+	{
+		"country": "Faroe Islands",
+		"score": "10"
+	},
+	{
+		"country": "Fiji",
+		"score": "10"
+	},
+	{
+		"country": "Finland",
+		"score": "10"
+	},
+	{
+		"country": "France",
+		"score": "10"
+		
+	},
+	{
+		"country": "French Guiana",
+		"score": "10"
+	},
+	{
+		"country": "French Polynesia",
+		"score": "10"
+	},
+	{
+		"country": "Gabon",
+		"score": "50"
+	},
+	{
+		"country": "Gambia",
+		"score": "50"
+	},
+	{
+		"country": "Georgia",
+		"score": "10"
+	},
+	{
+		"country": "Germany",
+		"score": "10"
+	},
+	{
+		"country": "Ghana",
+		"score": "50"
+	},
+	{
+		"country": "Gibraltar",
+		"score": "10"
+	},
+	{
+		"country": "Greece",
+		"score": "10"
+	},
+	{
+		"country": "Greenland",
+		"score": "10"
+	},
+	{
+		"country": "Grenada",
+		"score": "10"
+	},
+	{
+		"country": "Guadeloupe (French)",
+		"score": "10"
+	},
+	{
+		"country": "Guatemala",
+		"score": "10"
+	},
+	{
+		"country": "Guinea",
+		"score": "50"
+	},
+	{
+		"country": "Guinea Bissau",
+		"score": "50"
+	},
+	{
+		"country": "Guyana",
+		"score": "10"
+	},
+	{
+		"country": "Haiti",
+		"score": "30"
+		
+	},
+	{
+		"country": "Honduras",
+		"score": "10"
+	},
+	{
+		"country": "HongKong",
+		"score": "10"
+	},
+	{
+		"country": "Hungary",
+		"score": "10"
+	},
+	{
+		"country": "Iceland",
+		"score": "10"
+	},
+	{
+		"country": "India",
+		"score": "10"
+	},
+	{
+		"country": "Indonesia",
+		"score": "10"
+	},
+	{
+		"country": "Iran",
+		"score": "30"
+	},
+	{
+		"country": "Iraq",
+		"score": "30"
+	},
+	{
+		"country": "Ireland",
+		"score": "10"
+	},
+	{
+		"country": "Israel",
+		"score": "10"
+	},
+	{
+		"country": "Italy",
+		"score": "10"
+	},
+	{
+		"country": "Ivory Coast",
+		"score": "50"
+	},
+	{
+		"country": "Jamaica",
+		"score": "30"
+	},
+	{
+		"country": "Japan",
+		"score": "10"
+	},
+	{
+		"country": "Jordan",
+		"score": "30"
+	},
+	{
+		"country": "Kazakhstan",
+		"score": "40"
+	},
+	{
+		"country": "Kenya",
+		"score": "40"
+	},
+	{
+		"country": "Kiribati",
+		"score": "10"
+	},
+	{
+		"country": "Kosovo",
+		"score": "10"
+	},
+	{
+		"country": "Kuwait",
+		"score": "40"
+	},
+	{
+		"country": "Kyrgyzstan",
+		"score": "40"
+	},
+	{
+		"country": "Laos",
+		"score": "10"
+	},
+	{
+		"country": "Latvia",
+		"score": "10"
+	},
+	{
+		"country": "Lebanon",
+		"score": "40"
+		
+	},
+	{
+		"country": "Lesotho",
+		"score": "40"
+	},
+	{
+		"country": "Liberia",
+		"score": "50"
+	},
+	{
+		"country": "Libya",
+		"score": "50"
+	},
+	{
+		"country": "Liechtenstein",
+		"score": "10"
+		
+	},
+	{
+		"country": "Lithuania",
+		"score": "10"
+	},
+	{
+		"country": "Luxembourg",
+		"score": "10"
+	},
+	{
+		"country": "Macau",
+		"score": "10"
+	},
+	{
+		"country": "Macedonia",
+		"score": "10"
+	},
+	{
+		"country": "Madagascar",
+		"score": "30"
+	},
+	{
+		"country": "Malawi",
+		"score": "50"
+	},
+	{
+		"country": "Malaysia",
+		"score": "10"
+	},
+	{
+		"country": "Maldives",
+		"score": "10"
+	},
+	{
+		"country": "Mali",
+		"score": "50"
+	},
+	{
+		"country": "Malta",
+		"score": "10"
+	},
+	{
+		"country": "Martinique",
+		"score": "10"
+	},
+	{
+		"country": "Mauritania",
+		"score": "50"
+	},
+	{
+		"country": "Mauritius",
+		"score": "10"
+	},
+	{
+		"country": "Mexico",
+		"score": "20"
+	},
+	{
+		"country": "Micronesia",
+		"score": "10"
+	},
+	{
+		"country": "Moldova",
+		"score": "10"
+	},
+	{
+		"country": "Monaco",
+		"score": "10"
+	},
+	{
+		"country": "Mongolia",
+		"score": "10"
+	},
+	{
+		"country": "Montenegro",
+		"score": "10"
+	},
+	{
+		"country": "Montserrat",
+		"score": "10"
+	},
+	{
+		"country": "Morocco",
+		"score": "50"
+	},
+	{
+		"country": "Mozambique",
+		"score": "40"
+	},
+	{
+		"country": "Myanmar",
+		"score": "10"
+	},
+	{
+		"country": "Namibia",
+		"score": "10"
+	},
+	{
+		"country": "Nauru",
+		"score": "10"
+	},
+	{
+		"country": "Nepal",
+		"score": "10"
+	},
+	{
+		"country": "Netherlands",
+		"score": "10"
+	},
+	{
+		"country": "Netherlands Antilles",
+		"score": "10"
+	},
+	{
+		"country": "New Zealand",
+		"score": "10"
+	},
+	{
+		"country": "Nicaragua",
+		"score": "10"
+	},
+	{
+		"country": "Niger",
+		"score": "50"
+	},
+	{
+		"country": "Nigeria",
+		"score": "50"
+	},
+	{
+		"country": "Norway",
+		"score": "10"
+	},
+	{
+		"country": "Occupied Palestinian Territories",
+		"score": "50"
+	},
+	{
+		"country": "Oman",
+		"score": "30"
+	},
+	{
+		"country": "Pakistan",
+		"score": "50"
+	},
+	{
+		"country": "Panama",
+		"score": "10"
+	},
+	{
+		"country": "Papua New Guinea",
+		"score": "40"
+	},
+	{
+		"country": "Paraguay",
+		"score": "10"
+	},
+	{
+		"country": "Peru",
+		"score": "10"
+	},
+	{
+		"country": "Philippines",
+		"score": "10"
+	},
+	{
+		"country": "Poland",
+		"score": "10"
+	},
+	{
+		"country": "Polynesia",
+		"score": "10"
+	},
+	{
+		"country": "Portugal",
+		"score": "10"
+	},
+	{
+		"country": "Romania",
+		"score": "10"
+	},
+	{
+		"country": "Russia",
+		"score": "10"
+	},
+	{
+		"country": "Rwanda",
+		"score": "50"
+	},
+	{
+		"country": "Saint Kitts and Nevis",
+		"score": "10"
+	},
+	{
+		"country": "Saint Lucia",
+		"score": "10"
+	},
+	{
+		"country": "Samoa",
+		"score": "10"
+	},
+	{
+		"country": "Saudi Arabia",
+		"score": "10"
+	},
+	{
+		"country": "Senegal",
+		"score": "50"
+	},
+	{
+		"country": "Serbia",
+		"score": "10"
+		
+	},
+	{
+		"country": "Seychelles",
+		"score": "40"
+	},
+	{
+		"country": "Sierra Leone",
+		"score": "50"
+	},
+	{
+		"country": "Singapore",
+		"score": "10"
+	},
+	{
+		"country": "Slovakia",
+		"score": "10"
+	},
+	{
+		"country": "Slovenia",
+		"score": "10"
+		
+	},
+	{
+		"country": "Solomon Islands",
+		"score": "10"
+	},
+	{
+		"country": "Somalia",
+		"score": "50"
+	},
+	{
+		"country": "South Africa",
+		"score": "10"
+	},
+	{
+		"country": "South Korea",
+		"score": "10"
+	},
+	{
+		"country": "South Sudan",
+		"score": "50"
+	},
+	{
+		"country": "Spain",
+		"score": "10"
+	},
+	{
+		"country": "Sri Lanka",
+		"score": "10"
+	},
+	{
+		"country": "Sudan",
+		"score": "50"
+	},
+	{
+		"country": "Suriname",
+		"score": "10"
+	},
+	{
+		"country": "Swaziland",
+		"score": "40"
+	},
+	{
+		"country": "Sweden",
+		"score": "10"
+	},
+	{
+		"country": "Switzerland",
+		"score": "10"
+	},
+	{
+		"country": "Syria",
+		"score": "40"
+	},
+	{
+		"country": "Taiwan",
+		"score": "10"
+	},
+	{
+		"country": "Tajikistan",
+		"score": "10"
+	},
+	{
+		"country": "Thailand",
+		"score": "10"
+	},
+	{
+		"country": "Togo",
+		"score": "50"
+	},
+	{
+		"country": "Trinidad and Tobago",
+		"score": "10"
+	},
+	{
+		"country": "Tunisia",
+		"score": "50"
+	},
+	{
+		"country": "Turkey",
+		"score": "30"
+	},
+	{
+		"country": "Turkmenistan",
+		"score": "40"
+	},
+	{
+		"country": "Turks and Caicos Islands",
+		"score": "10"
+	},
+	{
+		"country": "Tuvalu",
+		"score": "10"
+	},
+	{
+		"country": "Uganda",
+		"score": "50"
+	},
+	{
+		"country": "Ukraine",
+		"score": "10"
+	},
+	{
+		"country": "United Arab Emirates",
+		"score": "10"
+	},
+	{
+		"country": "United Kingdom",
+		"score": "10"
+	},
+	{
+		"country": "Uruguay",
+		"score": "10"
+	},
+	{
+		"country": "Uzbekistan",
+		"score": "10"
+	},
+	{
+		"country": "Venezuela",
+		"score": "10"
+	},
+	{
+		"country": "Vietnam",
+		"score": "10"
+	},
+	{
+		"country": "Yemen",
+		"score": "40"
+	},
+	{
+		"country": "Zambia",
+		"score": "40"
+	},
+	{
+		"country": "Zimbabwe",
+		"score": "40"
+	}
+]

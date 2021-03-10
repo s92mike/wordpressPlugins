@@ -1,3 +1,4 @@
+import Elements from './classes-common.js';
 (function( $ ) {
   const __divID = `roc-calculator`;
   const __calcClass = `calculate-btn`;
@@ -20,91 +21,31 @@
     return moment(currentDate).format(formatString);
   }
 
-  class Elements {
-    aButton = ({ title = ``, url = ``, className = `button` }) => {
-      return $("<a/>")
-        .addClass(className)
-        .attr('href', url)
-        .append(title);
-    }
-    bElement = ({ value = `` }) => {
-      return $(`<b/>`).append(value);
-    }
-    h4Element = ({ value = `` }) => {
-      return $(`<h4/>`).append(value);
-    }
-    divElement = ({ className = `` }) => {
-      return $(`<div/>`).addClass(className);
-    }
-    buttonElement = ({ id = ``, className = ``, value = `` }) => {
-      return $(`<button>`)
-      .addClass(`button`)
-      .addClass(`conditional`)
-      .addClass(className)
-      .html(value)
-      .attr(`id`, id);
-    }
-    dateElement =  ({ id = ``, className = `` }) => {
-      return $(`<input />`)
-      .attr(`id`, id)
-      .attr(`type`, `text`)
-      .addClass(`form-control`)
-      .addClass(className)
-      .datetimepicker({ format: `YYYY-MM-DD` })
-      .on(`dp.change`, function() {
-        if ($(this).val().length > 0) {
-          ___greenCardExpire = $(this).val();
-        }
-      })
-      .on(`dp.hide`, function() {
-        if ($(this).val().length > 0) {
-          __mainDiv.children().children(`button`).removeAttr(__disabled);
-        }
-      });
-    }
-    loaderImg = ({ src = `` }) => {
-      return $(`<img />`).attr(`src`, src);
-    }
-  }
-
   class Layout extends Elements {
     constructor() {
       super();
+    }
+    updateData = ({ type, value }) => {
+      switch (type) {
+        case `greenCard`:
+          ___greenCardExpire = value;
+          break;
+        default:
+          break;
+      }
     }
     dateDisplay = () => {
       const displayContainer = this.divElement({ className: `main` });
       const h4Ele = this.h4Element({ value: __h4List.dateElement });
       const dateContainer = this.divElement({ className: __dateContainer });
-      const inputDate = this.dateElement({ id: `roc-datepicker`});
+      const inputDate = this.dateElement({ id: `roc-datepicker`, updateGlobal: this.updateData, displayDiv: __mainDiv });
       const buttonCalc = this.buttonElement({ 
         id: `calculate`, 
         className: __calcClass, 
-        value: `Calculate` 
+        value: `Calculate`
       }).attr(__disabled, __disabled);
       displayContainer.append(h4Ele).append(dateContainer.append(inputDate)).append(buttonCalc)
       __mainDiv.html(``).append(displayContainer);
-    }
-    loadingBar = () => {
-      const loader = this.loaderImg({ src: __loadingGIF });
-      __mainDiv.html(``).append(loader).delay(1000).promise().done(() => {
-        const convDate = this.calculateROC({ datePick: ___greenCardExpire });
-        this.successfullDisplay({ currentDate: convDate });
-      });
-    }
-    progressBar = () => {
-      const mainDiv = this.divElement({ className: `progress-bar` });
-      const barDiv = this.divElement({ className: `bar` });
-      const fillerDiv = this.divElement({ className: `filler` });
-      mainDiv.append(barDiv.append(fillerDiv));
-      __mainDiv.html(``).append(mainDiv).delay(500).promise().done(function() {
-        $(this).children(`.progress-bar`).children(`.bar`).children(`.filler`).animate({ width: `100%` }, {
-          duration: 500,
-          complete: () => {
-            ___greenCardExpire = ``;
-            ROC.main();
-          }
-        });
-      });
     }
     calculateROC = ({ datePick = `` }) => {
       let convtDate;
@@ -119,10 +60,10 @@
       return convtDate;
     }
     successfullDisplay = ({ currentDate = Date.now() }) => {
+      const prgressBar =this.progressBar;
       const mainDiv = this.divElement({ className: `success` });
       const infoDiv = this.divElement({ className: `info` });
       const bEle = this.bElement({ value: formatDateMoment({  currentDate: ___greenCardExpire}) })
-      infoDiv.append(`2 Year green card expiry date: `).append(bEle);
       const bEleSoonest = this.bElement({ value: formatDateMoment({ currentDate })});
       const h4EleSoonest = this.h4Element({ value: `The soonest you can file for removal of conditions is: `}).addClass(`output`).append(bEleSoonest);
       const aBtn = this.aButton({ 
@@ -135,11 +76,14 @@
         className: `rv-reset-btn`,
         value: `Reset`
       });
+      infoDiv.append(`2 Year green card expiry date: `).append(bEle);
       mainDiv.append(infoDiv).append(h4EleSoonest).append(buttonReset).append(aBtn);
-      const prgressBar =this.progressBar;
       __mainDiv.html(``).append(mainDiv).delay(500).promise().done(function() {
         $(this).children().children(`.rv-reset-btn`).click(() => {
-          prgressBar();
+          prgressBar({ displayDiv: __mainDiv, completeFunc:  () => {
+            ___greenCardExpire = ``;
+            ROC.main();
+          }});
         });
       });
     }
@@ -151,9 +95,16 @@
     main = () => {
       this.dateDisplay();
       const loadingBarFunc = this.loadingBar;
+      const calculateROC = this.calculateROC;
+      const successfullDisplay = this.successfullDisplay;
       __mainDiv.delay(500).promise().done(function() {
-        $(this).children().children(`button`).click(function() {
-          loadingBarFunc();
+        $(this).children().children(`button`).click(() => {
+          loadingBarFunc({ 
+            displayDiv: __mainDiv, 
+            loadingGIF: __loadingGIF,
+            doneFunc: () => {
+              successfullDisplay({ currentDate: calculateROC({ datePick: ___greenCardExpire }) });
+            }});
         });
       });
     }

@@ -1,0 +1,88 @@
+[
+  {
+    "male": [
+      {
+        "age_dif": {
+          "title": "How much of an age difference is there between you and your fiancé?",
+          "0 - 10 Years": 0,
+          "11 - 20 Years": 5,
+          "21 - 30 Years": 6,
+          "30+ Years": 7
+        }
+      },
+      {
+        "year_long": {
+          "title": "How long have you been in a relationship together?",
+          "Under 1 Year": 5,
+          "1 - 2 Years": 0,
+          "3+ Years": -5
+        }
+      },
+      {
+        "met_times": {
+          "title": "How many times have you physically met each other?",
+          "Select": 2,
+          "0": -3,
+          "1": 5,
+          "2": 0,
+          "3+": -1
+        }
+      }
+    ],
+    "female": [
+      {
+        "age_diff": {
+          "title": "How much of an age difference is there between you and your fiancé?",
+          "0 - 3 Years": 0,
+          "4 - 10 Years": 5,
+          "11 - 20 Years": 10,
+          "20+ Years": 20
+        }
+      },
+      {
+        "year_long": {
+          "title": "How long have you been in a relationship together?",
+          "Under 1 Year": 5,
+          "1 - 2 Years": 0,
+          "3+ Years": -5
+        }
+      },
+      {
+        "met_times": {
+          "title": "How many times have you physically met each other?",
+          "Select": 2,
+          "0": -3,
+          "1": 5,
+          "2": 0,
+          "3+": -5
+        }
+      }
+    ]
+  },
+  {
+    "speak": {
+      "title": "Do you both speak at least one common language?",
+      "Yes": 0,
+      "No": 5
+    }
+  },
+  {
+    "sponsor_inc_req": {
+      "title": "How close does the sponsor meet the income requirement?",
+      "tool_tip": "See <a href=\"/visa-income-requirement-calculator/\" target=\"_blank\">Income Requirement Calculator</a> to determine the income required.",
+      "I make barely enough": 20,
+      "I make 15%+ more than required": 5,
+      "I make 50%+ more than required": -5
+    }
+  },
+  {
+    "prime_inc": {
+      "title": "What is the sponsor’s primary source of income?",
+      "tool_tip": "Self-employed income is always more heavily scrutinized than a conventional W2 job.",
+      "I’m self-employed": 10,
+      "I work as a 1099 contractor": 5,
+      "I am a W2 employee with a startup (Company under 5-years-old)": 0,
+      "I am a W2 employee with an established company.": -5
+    }
+  }
+]

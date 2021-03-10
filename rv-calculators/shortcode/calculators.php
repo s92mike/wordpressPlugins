@@ -48,6 +48,7 @@ add_shortcode('rv-nat-sched-calculator','date_calculator_naturalization');
     ob_start();
     wp_enqueue_style( 'roc-calculator', PLUGIN_APP . 'css/roc-calculator.css', array() , filemtime( PLUGIN_PATH . 'css/roc-calculator.css' ), 'all' );
     wp_enqueue_script( 'classes-roc-calcutor', PLUGIN_APP . 'js/classes-roc-calcutor.js' , array(), filemtime( PLUGIN_PATH . 'js/classes-roc-calcutor.js' ), true);
+    add_filter( 'script_loader_tag', __NAMESPACE__ . '\\wpdocs_my_add_sri', 10, 2 );
     $arg = array('src' => PLUGIN_APP . 'images/rapidvisathrobber.gif');
     $ext = 'roc';
     ccm_get_template_part('template-sections/calculator', $arg, $ext);
@@ -55,3 +56,5 @@ add_shortcode('rv-nat-sched-calculator','date_calculator_naturalization');
  }
 
  add_shortcode('rv-roc-calculator', 'roc_calculator');
+
+ 

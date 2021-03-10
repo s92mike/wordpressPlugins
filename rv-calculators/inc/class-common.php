@@ -10,6 +10,8 @@ if ( ! class_exists( 'Common' ) ) {
                 case 'react-date-calc-nat':
                     $html = str_replace( " id='react-date-calc-nat-js'>", " id='react-date-calc-nat-js' type='text/babel' />", $html ); 
                     break;
+                case 'classes-roc-calcutor':
+                    $html = str_replace( " id='classes-roc-calcutor-js'>", " id='classes-roc-calcutor-js' type='module' />", $html ); 
                 default:
                     break;
             }
